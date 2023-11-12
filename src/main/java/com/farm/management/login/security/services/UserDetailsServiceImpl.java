@@ -1,4 +1,4 @@
-package com.bezkoder.spring.login.security.services;
+package com.farm.management.login.security.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bezkoder.spring.login.models.User;
-import com.bezkoder.spring.login.repository.UserRepository;
+import com.farm.management.login.models.User;
+import com.farm.management.login.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

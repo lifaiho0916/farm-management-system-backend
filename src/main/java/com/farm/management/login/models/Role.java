@@ -1,4 +1,4 @@
-package com.bezkoder.spring.login.models;
+package com.farm.management.login.models;
 
 import jakarta.persistence.*;
 

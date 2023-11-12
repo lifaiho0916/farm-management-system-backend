@@ -1,13 +1,13 @@
-package com.bezkoder.spring.login;
+package com.farm.management.login;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootLoginExampleApplication {
+public class FarmManagementApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootLoginExampleApplication.class, args);
+		SpringApplication.run(FarmManagementApplication.class, args);
 	}
 
 }

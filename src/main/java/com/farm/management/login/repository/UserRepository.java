@@ -1,11 +1,11 @@
-package com.bezkoder.spring.login.repository;
+package com.farm.management.login.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.bezkoder.spring.login.models.User;
+import com.farm.management.login.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {

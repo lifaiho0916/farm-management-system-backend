@@ -1,4 +1,4 @@
-package com.bezkoder.spring.login.payload.request;
+package com.farm.management.login.payload.request;
 
 import jakarta.validation.constraints.NotBlank;
 
