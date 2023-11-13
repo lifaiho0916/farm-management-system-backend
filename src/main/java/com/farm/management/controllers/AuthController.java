@@ -1,4 +1,4 @@
-package com.farm.management.login.controllers;
+package com.farm.management.controllers;
 
 import java.util.HashSet;
 import java.util.List;
@@ -22,17 +22,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.farm.management.login.models.ERole;
-import com.farm.management.login.models.Role;
-import com.farm.management.login.models.User;
-import com.farm.management.login.payload.request.LoginRequest;
-import com.farm.management.login.payload.request.SignupRequest;
-import com.farm.management.login.payload.response.UserInfoResponse;
-import com.farm.management.login.payload.response.MessageResponse;
-import com.farm.management.login.repository.RoleRepository;
-import com.farm.management.login.repository.UserRepository;
-import com.farm.management.login.security.jwt.JwtUtils;
-import com.farm.management.login.security.services.UserDetailsImpl;
+import com.farm.management.models.ERole;
+import com.farm.management.models.Role;
+import com.farm.management.models.User;
+import com.farm.management.payload.request.LoginRequest;
+import com.farm.management.payload.request.SignupRequest;
+import com.farm.management.payload.response.UserInfoResponse;
+import com.farm.management.payload.response.MessageResponse;
+import com.farm.management.repository.RoleRepository;
+import com.farm.management.repository.UserRepository;
+import com.farm.management.security.jwt.JwtUtils;
+import com.farm.management.security.services.UserDetailsImpl;
 
 //for Angular Client (withCredentials)
 //@CrossOrigin(origins = "http://localhost:8081", maxAge = 3600, allowCredentials="true")
@@ -59,7 +59,7 @@ public class AuthController {
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
     Authentication authentication = authenticationManager
-        .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
 

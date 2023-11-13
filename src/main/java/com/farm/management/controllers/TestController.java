@@ -1,4 +1,4 @@
-package com.farm.management.login.controllers;
+package com.farm.management.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;

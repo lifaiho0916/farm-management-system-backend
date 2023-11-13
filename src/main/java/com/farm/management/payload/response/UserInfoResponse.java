@@ -1,4 +1,4 @@
-package com.farm.management.login.payload.response;
+package com.farm.management.payload.response;
 
 import java.util.List;
 

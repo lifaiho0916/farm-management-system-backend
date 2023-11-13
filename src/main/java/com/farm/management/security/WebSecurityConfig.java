@@ -1,4 +1,4 @@
-package com.farm.management.login.security;
+package com.farm.management.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,9 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.farm.management.login.security.jwt.AuthEntryPointJwt;
-import com.farm.management.login.security.jwt.AuthTokenFilter;
-import com.farm.management.login.security.services.UserDetailsServiceImpl;
+import com.farm.management.security.jwt.AuthEntryPointJwt;
+import com.farm.management.security.jwt.AuthTokenFilter;
+import com.farm.management.security.services.UserDetailsServiceImpl;
 
 @Configuration
 //@EnableWebSecurity

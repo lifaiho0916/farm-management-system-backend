@@ -1,4 +1,4 @@
-package com.farm.management.login.security.jwt;
+package com.farm.management.security.jwt;
 
 import java.security.Key;
 import java.util.Date;
@@ -13,7 +13,7 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
-import com.farm.management.login.security.services.UserDetailsImpl;
+import com.farm.management.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

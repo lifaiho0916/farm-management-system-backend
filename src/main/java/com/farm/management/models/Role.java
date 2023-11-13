@@ -1,4 +1,4 @@
-package com.farm.management.login.models;
+package com.farm.management.models;
 
 import jakarta.persistence.*;
 

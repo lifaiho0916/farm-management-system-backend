@@ -1,4 +1,4 @@
-package com.farm.management.login;
+package com.farm.management;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

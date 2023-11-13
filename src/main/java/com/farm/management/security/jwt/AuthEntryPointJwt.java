@@ -1,4 +1,4 @@
-package com.farm.management.login.security.jwt;
+package com.farm.management.security.jwt;
 
 import java.io.IOException;
 import java.util.HashMap;
