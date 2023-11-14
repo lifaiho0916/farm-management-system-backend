@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "users", uniqueConstraints = {
+@Table(name = "tb_users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
             "username"
         }),
@@ -23,11 +23,10 @@ import java.util.Set;
 public class User extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_users;
 
     @NotBlank
-    @Size(max = 40)
-    private String name;
+    private Long id_user_level;
 
     @NotBlank
     @Size(max = 15)
@@ -43,10 +42,14 @@ public class User extends DateAudit {
     @Size(max = 100)
     private String password;
 
+    @NotBlank
+    @Size(max = 40)
+    private String name;
+
+
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "tb_user_level",
+            joinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles = new HashSet<>();
 
     public User() {

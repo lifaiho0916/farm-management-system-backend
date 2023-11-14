@@ -1,14 +1,14 @@
 package com.farm.management.controller;
 
 import com.farm.management.exception.AppException;
-import com.farm.management.model.Role;
-import com.farm.management.model.RoleName;
+import com.farm.management.model.LevelName;
 import com.farm.management.model.User;
+import com.farm.management.model.UserLevel;
 import com.farm.management.payload.ApiResponse;
 import com.farm.management.payload.JwtAuthenticationResponse;
 import com.farm.management.payload.LoginRequest;
 import com.farm.management.payload.SignUpRequest;
-import com.farm.management.repository.RoleRepository;
+import com.farm.management.repository.UserLevelRepository;
 import com.farm.management.repository.UserRepository;
 import com.farm.management.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class AuthController {
     UserRepository userRepository;
 
     @Autowired
-    RoleRepository roleRepository;
+    UserLevelRepository roleRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -82,17 +82,17 @@ public class AuthController {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+        UserLevel userRole = roleRepository.findByName(LevelName.USER)
                 .orElseThrow(() -> new AppException("User Role not set."));
 
-        user.setRoles(Collections.singleton(userRole));
-
+//        user.setId_user_level(Collections.singleton(userRole));
+        System.out.println("==================" + userRole);
         User result = userRepository.save(user);
-
+        System.out.println("==================" + result);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/users/{username}")
                 .buildAndExpand(result.getUsername()).toUri();
-
+        System.out.println("==================" + location);
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
 }
