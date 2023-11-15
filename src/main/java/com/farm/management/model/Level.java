@@ -6,23 +6,23 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "tb_user_level")
-public class UserLevel {
+@Table(name = "tb_level")
+public class Level {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_user_level;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     @NaturalId
     @Column(length = 60)
-    private LevelName description;
+    private LevelName name;
 
-    public UserLevel() {
+    public Level() {
 
     }
 
-    public UserLevel(LevelName description) {
-        this.description = description;
+    public Level(LevelName name) {
+        this.name = name;
     }
 
 }

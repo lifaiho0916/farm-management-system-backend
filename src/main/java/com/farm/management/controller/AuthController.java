@@ -3,12 +3,12 @@ package com.farm.management.controller;
 import com.farm.management.exception.AppException;
 import com.farm.management.model.LevelName;
 import com.farm.management.model.User;
-import com.farm.management.model.UserLevel;
+import com.farm.management.model.Level;
 import com.farm.management.payload.ApiResponse;
 import com.farm.management.payload.JwtAuthenticationResponse;
 import com.farm.management.payload.LoginRequest;
 import com.farm.management.payload.SignUpRequest;
-import com.farm.management.repository.UserLevelRepository;
+import com.farm.management.repository.LevelRepository;
 import com.farm.management.repository.UserRepository;
 import com.farm.management.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class AuthController {
     UserRepository userRepository;
 
     @Autowired
-    UserLevelRepository roleRepository;
+    LevelRepository roleRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -81,12 +81,11 @@ public class AuthController {
                 signUpRequest.getEmail(), signUpRequest.getPassword());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        UserLevel userRole = roleRepository.findByName(LevelName.USER)
+        System.out.println("==================" + user);
+        Level userRole = roleRepository.findByName(LevelName.USER)
                 .orElseThrow(() -> new AppException("User Role not set."));
-
-//        user.setId_user_level(Collections.singleton(userRole));
         System.out.println("==================" + userRole);
+        user.setRoles(Collections.singleton(userRole));
         User result = userRepository.save(user);
         System.out.println("==================" + result);
         URI location = ServletUriComponentsBuilder

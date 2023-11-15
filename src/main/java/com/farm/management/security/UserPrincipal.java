@@ -36,12 +36,12 @@ public class UserPrincipal implements UserDetails {
     }
 
     public static UserPrincipal create(User user) {
-        List<GrantedAuthority> authorities = user.getUser().stream().map(role ->
+        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
                 new SimpleGrantedAuthority(role.getName().name())
         ).collect(Collectors.toList());
 
         return new UserPrincipal(
-                user.getId_users(),
+                user.getId(),
                 user.getName(),
                 user.getUsername(),
                 user.getEmail(),
@@ -102,12 +102,12 @@ public class UserPrincipal implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserPrincipal that = (UserPrincipal) o;
-        return Objects.equals(id_users, that.id_users);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id_users);
+        return Objects.hash(id);
     }
 }

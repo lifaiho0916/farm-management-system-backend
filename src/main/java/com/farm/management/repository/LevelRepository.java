@@ -1,6 +1,6 @@
 package com.farm.management.repository;
 
-import com.farm.management.model.UserLevel;
+import com.farm.management.model.Level;
 import com.farm.management.model.LevelName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserLevelRepository extends JpaRepository<UserLevel, Long> {
-    Optional<UserLevel> findByName(LevelName levelName);
+public interface LevelRepository extends JpaRepository<Level, Long> {
+    Optional<Level> findByName(LevelName levelName);
 }

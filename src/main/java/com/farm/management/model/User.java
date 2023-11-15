@@ -3,10 +3,13 @@ package com.farm.management.model;
 import com.farm.management.model.audit.DateAudit;
 import lombok.Data;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.text.DecimalFormat;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,10 +26,7 @@ import java.util.Set;
 public class User extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_users;
-
-    @NotBlank
-    private Long id_user_level;
+    private Long id;
 
     @NotBlank
     @Size(max = 15)
@@ -46,11 +46,21 @@ public class User extends DateAudit {
     @Size(max = 40)
     private String name;
 
+    private Double doc;
+
+    private String address;
+    private String city;
+    private String phone;
+
+    private Long zipcode;
+    private Long created_by;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "tb_user_level",
-            joinColumns = @JoinColumn(name = "user_id"))
-    private Set<Role> roles = new HashSet<>();
+            joinColumns = @JoinColumn(name = "id_users"),
+            inverseJoinColumns = @JoinColumn(name = "id_level"))
+    private Set<Level> roles = new HashSet<>();
 
     public User() {
 
