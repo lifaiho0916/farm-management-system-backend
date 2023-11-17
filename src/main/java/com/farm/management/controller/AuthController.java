@@ -66,10 +66,10 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
-                    HttpStatus.BAD_REQUEST);
-        }
+//        if(userRepository.existsByUsername(signUpRequest.getUsername())) {
+//            return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
+//                    HttpStatus.BAD_REQUEST);
+//        }
 
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
@@ -77,12 +77,12 @@ public class AuthController {
         }
 
         // Creating user's account
-        User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
+        User user = new User(signUpRequest.getName(),
                 signUpRequest.getEmail(), signUpRequest.getPassword());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         System.out.println("==================" + user);
-        Level userRole = roleRepository.findByName(LevelName.USER)
+        Level userRole = roleRepository.findByName(LevelName.ADMIN)
                 .orElseThrow(() -> new AppException("User Role not set."));
         System.out.println("==================" + userRole);
         user.setRoles(Collections.singleton(userRole));
