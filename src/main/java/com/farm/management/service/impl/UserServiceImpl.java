@@ -48,4 +48,8 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
     }
+
+    public List<User> findByCreated_by(Long created_by){
+        return userRepository.findByCreated_by(created_by);
+    }
 }

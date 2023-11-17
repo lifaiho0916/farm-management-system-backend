@@ -3,13 +3,11 @@ package com.farm.management.model;
 import com.farm.management.model.audit.DateAudit;
 import lombok.Data;
 import org.hibernate.annotations.NaturalId;
-import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.text.DecimalFormat;
 import java.util.HashSet;
 import java.util.Set;
 
