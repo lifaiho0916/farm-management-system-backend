@@ -6,7 +6,6 @@ import com.farm.management.model.LevelName;
 import com.farm.management.model.User;
 import com.farm.management.payload.UserSummary;
 import com.farm.management.repository.LevelRepository;
-import com.farm.management.repository.UserRepository;
 import com.farm.management.security.CurrentUser;
 import com.farm.management.security.UserPrincipal;
 import com.farm.management.service.UserService;
@@ -33,9 +32,6 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     LevelRepository roleRepository;
 
     @Autowired
@@ -52,6 +48,7 @@ public class UserController {
     @PostMapping("user")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<User> createUser(@RequestBody User user, @CurrentUser UserPrincipal currentUser){
+        user.setUsername(user.getEmail());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Level userRole = roleRepository.findByName(LevelName.USER)
                 .orElseThrow(() -> new AppException("User Role not set."));
@@ -84,8 +81,12 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     // http://localhost:8080/api/users/1
     public ResponseEntity<User> updateUser(@PathVariable("id") Long userId,
-                                           @RequestBody User user){
+                                           @RequestBody User user, @CurrentUser UserPrincipal currentUser){
         user.setId(userId);
+        System.out.println(user.getPassword());
+        if(user.getPassword() == null){
+            user.setPassword(currentUser.getPassword());
+        }
         User updatedUser = userService.updateUser(user);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
