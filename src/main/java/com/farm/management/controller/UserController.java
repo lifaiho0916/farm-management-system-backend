@@ -82,11 +82,10 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     // http://localhost:8080/api/users/1
     public ResponseEntity<User> updateUser(@PathVariable("id") Long userId,
-                                           @RequestBody User user, @CurrentUser UserPrincipal currentUser){
+                                           @RequestBody User user){
         user.setId(userId);
-        System.out.println(user.getPassword());
-        if(user.getPassword() == null){
-            user.setPassword(currentUser.getPassword());
+        if(user.getPassword() != null) {
+        	user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
         User updatedUser = userService.updateUser(user);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
