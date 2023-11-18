@@ -7,4 +7,6 @@ import com.farm.management.model.User;
 public interface FarmsownerService {
 
     Farmsowner createFarmowner(Farmsowner farmowner);
+
+    void deleteFarmowner(Long farmId);
 }

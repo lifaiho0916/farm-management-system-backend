@@ -49,7 +49,7 @@ public class UserController {
     @PostMapping("user")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<User> createUser(@RequestBody User user, @CurrentUser UserPrincipal currentUser) {
-    	user.setUsername(user.getEmail());
+        user.setUsername(user.getEmail());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Level userRole = roleRepository.findByName(LevelName.USER)
                 .orElseThrow(() -> new AppException("User Role not set."));

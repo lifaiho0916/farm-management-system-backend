@@ -17,4 +17,9 @@ public class FarmsownerServiceImpl implements FarmsownerService {
     public Farmsowner createFarmowner(Farmsowner farmsowner) {
         return farmownerRepository.save(farmsowner);
     }
+
+    @Override
+    public void deleteFarmowner(Long farmId) {
+        farmownerRepository.deleteById(farmId);
+    }
 }
