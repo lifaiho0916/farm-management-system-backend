@@ -1,11 +1,13 @@
 package com.farm.management.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "tb_farms_owner")
 public class Farmsowner {
 

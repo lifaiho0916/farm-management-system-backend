@@ -2,6 +2,7 @@ package com.farm.management.model;
 
 import com.farm.management.model.audit.DateAudit;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "tb_users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
             "username"
@@ -59,10 +61,6 @@ public class User extends DateAudit {
             joinColumns = @JoinColumn(name = "id_users"),
             inverseJoinColumns = @JoinColumn(name = "id_level"))
     private Set<Level> roles = new HashSet<>();
-
-    public User() {
-
-    }
 
     public User(String name, String email, String password) {
         this.name = name;
