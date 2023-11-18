@@ -81,17 +81,15 @@ public class AuthController {
                 signUpRequest.getEmail(), signUpRequest.getPassword());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        System.out.println("==================" + user);
         Level userRole = roleRepository.findByName(LevelName.ADMIN)
                 .orElseThrow(() -> new AppException("User Role not set."));
-        System.out.println("==================" + userRole);
+
+        System.out.println("userRole: " + userRole + "-------------------");
         user.setRoles(Collections.singleton(userRole));
         User result = userRepository.save(user);
-        System.out.println("==================" + result);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/users/{username}")
                 .buildAndExpand(result.getUsername()).toUri();
-        System.out.println("==================" + location);
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
 }

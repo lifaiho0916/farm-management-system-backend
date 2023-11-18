@@ -1,5 +1,6 @@
 package com.farm.management.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_farms_owner")
 public class Farmsowner {
 
@@ -22,4 +24,9 @@ public class Farmsowner {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_users", nullable = false)
     private User user;
+
+    public Farmsowner(Farm farm, User user) {
+        this.farm = farm;
+        this.user = user;
+    }
 }

@@ -1,7 +1,7 @@
 package com.farm.management.service;
 
-
 import com.farm.management.model.Farm;
+import com.farm.management.model.Farmsowner;
 
 import java.util.List;
 
@@ -9,11 +9,12 @@ public interface FarmService {
 
     Farm createFarm(Farm farm);
 
-    Farm getFarmById(Long farmId);
+    Farm getFarmById(Long id);
 
-    List<Farm> getAllFarms();
+    List<Farm> findById_user(Long id);
 
     Farm updateFarm(Farm farm);
 
     void deleteFarm(Long farmId);
+
 }
