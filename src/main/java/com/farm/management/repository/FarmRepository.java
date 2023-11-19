@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface FarmRepository extends JpaRepository<Farm, Long> {
 
-    @Query(value = "select * from tb_farm left join tb_farm_owner on tb_farm.id = tb_farm_owner.id_farm e where e.id_user like %:id_user%", nativeQuery = true)
+    @Query(value = "SELECT * FROM tb_farm e LEFT JOIN tb_farms_owner p ON p.id_farm = e.id WHERE p.id_users like %:id_user%", nativeQuery = true)
     List<Farm> findById_user(@Param("id_user") Long id_user);
 }
