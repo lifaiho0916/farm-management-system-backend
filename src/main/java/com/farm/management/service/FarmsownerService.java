@@ -8,5 +8,5 @@ public interface FarmsownerService {
 
     Farmsowner createFarmowner(Farmsowner farmowner);
 
-    void deleteFarmowner(Long farmId);
+    void deleteFarmonwerByFarmId(Long farmId);
 }

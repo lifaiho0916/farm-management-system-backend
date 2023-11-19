@@ -6,6 +6,7 @@ import com.farm.management.security.UserPrincipal;
 import com.farm.management.service.FarmService;
 import com.farm.management.service.FarmsownerService;
 import com.farm.management.service.UserService;
+import com.farm.management.service.UserfarmService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,14 @@ public class FarmController {
 
     @Autowired
     private FarmService farmService;
+
+    @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserfarmService userfarmService;
+
+    @Autowired
     private FarmsownerService farmsownerService;
 
     @PostMapping("/farm")
@@ -66,8 +74,9 @@ public class FarmController {
     @DeleteMapping("farm/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> deleteFarm(@PathVariable("id") Long id){
-        farmsownerService.deleteFarmowner(id);
+        farmsownerService.deleteFarmonwerByFarmId(id);
         farmService.deleteFarm(id);
+//        userfarmService.deleteUserfarmByFarmId(id);
         return new ResponseEntity<>("User successfully deleted!", HttpStatus.OK);
     }
 }

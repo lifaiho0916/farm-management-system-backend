@@ -19,7 +19,7 @@ public class FarmsownerServiceImpl implements FarmsownerService {
     }
 
     @Override
-    public void deleteFarmowner(Long farmId) {
-        farmownerRepository.deleteById(farmId);
+    public void deleteFarmonwerByFarmId(Long farmId) {
+        farmownerRepository.deleteFarmOwnerByFarmId(farmId);
     }
 }

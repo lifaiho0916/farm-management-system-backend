@@ -39,8 +39,7 @@ public class FarmServiceImpl implements FarmService {
         existingFarm.setCity(farm.getCity());
         existingFarm.setZipcode(farm.getZipcode());
         existingFarm.setState(farm.getState());
-        Farm updatedFarm = farmRepository.save(existingFarm);
-        return updatedFarm;
+        return farmRepository.save(existingFarm);
     }
 
     @Override

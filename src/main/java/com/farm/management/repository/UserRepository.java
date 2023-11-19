@@ -23,6 +23,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Boolean existsByEmail(String email);
 
-    @Query(value = "select * from tb_users e where e.created_by like %:created_by%", nativeQuery = true)
+    @Query(value = "select * from tb_users where created_by is %:created_by%", nativeQuery = true)
     List<User> findByCreated_by(@Param("created_by") Long created_by);
 }

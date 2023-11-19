@@ -3,13 +3,16 @@ package com.farm.management.model;
 import com.farm.management.model.audit.DateAudit;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -55,12 +58,17 @@ public class User extends DateAudit {
     private Long zipcode;
     private Long created_by;
 
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "tb_user_level",
             joinColumns = @JoinColumn(name = "id_users"),
             inverseJoinColumns = @JoinColumn(name = "id_level"))
     private Set<Level> roles = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "tb_user_permission",
+            joinColumns = @JoinColumn(name = "id_users"),
+            inverseJoinColumns = @JoinColumn(name = "id_farm"))
+    private Set<Farm> farms = new HashSet<>();
 
     public User(String name, String email, String password) {
         this.name = name;

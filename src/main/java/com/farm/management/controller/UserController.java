@@ -4,11 +4,15 @@ import com.farm.management.exception.AppException;
 import com.farm.management.model.Level;
 import com.farm.management.model.LevelName;
 import com.farm.management.model.User;
+import com.farm.management.model.Userfarm;
+import com.farm.management.payload.AssignRequest;
 import com.farm.management.payload.UserSummary;
 import com.farm.management.repository.LevelRepository;
 import com.farm.management.security.CurrentUser;
 import com.farm.management.security.UserPrincipal;
+import com.farm.management.service.FarmService;
 import com.farm.management.service.UserService;
+import com.farm.management.service.UserfarmService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +27,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.Valid;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api")
@@ -32,10 +38,14 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private FarmService farmService;
+
+    @Autowired
     LevelRepository roleRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     // build create User REST API
@@ -97,5 +107,15 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long userId){
         userService.deleteUser(userId);
         return new ResponseEntity<>("User successfully deleted!", HttpStatus.OK);
+    }
+
+    @PostMapping("/user/assign_farm")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Userfarm> createUserfarm(@Valid @RequestBody AssignRequest assignRequest){
+        Userfarm savedUserfarm = new Userfarm();
+        savedUserfarm.setFarm(farmService.getFarmById(assignRequest.getFarm_id()));
+        savedUserfarm.setUser(userService.getUserById(assignRequest.getUser_id()));
+
+        return new ResponseEntity<>(savedUserfarm, HttpStatus.CREATED);
     }
 }
