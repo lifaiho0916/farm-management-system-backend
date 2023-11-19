@@ -24,6 +24,6 @@ public class Farm extends DateAudit {
 
     private String address;
     private String city;
-    private String states;
+    private String state;
     private String zipcode;
 }
