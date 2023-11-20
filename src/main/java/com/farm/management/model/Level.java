@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Table(name = "tb_level")
 public class Level {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -24,5 +23,4 @@ public class Level {
     public Level(LevelName name) {
         this.name = name;
     }
-
 }

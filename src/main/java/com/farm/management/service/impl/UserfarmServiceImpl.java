@@ -20,15 +20,6 @@ public class UserfarmServiceImpl implements UserfarmService {
     public Userfarm createUserfarm(Userfarm userfarm) {
         return userfarmRepository.save(userfarm);
     }
-
-    public Userfarm updateUserfarm(Userfarm userfarm){
-        Userfarm existingUserfarm = userfarmRepository.findById(userfarm.getId()).get();
-        existingUserfarm.setFarm(userfarm.getFarm());
-        existingUserfarm.setUser(userfarm.getUser());
-        existingUserfarm.setDescription(userfarm.getDescription());
-        Userfarm updatedUserfarm = userfarmRepository.save(existingUserfarm);
-        return updatedUserfarm;
-    };
     
     @Override
     public boolean isUserIdExist(Long userId) {

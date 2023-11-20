@@ -124,9 +124,10 @@ public class UserController {
     		if(userFarmService.isUserIdExist(userId)) {
     			userFarmService.updateUserFarmByUserId(userId, farmId);
     		} else {
+    			System.out.println(userId + "----------" + farmId);
     			Userfarm newUserfarm = new Userfarm();
-    	        newUserfarm.setFarm(farmService.getFarmById(assignRequest.getFarm_id()));
-    	        newUserfarm.setUser(userService.getUserById(assignRequest.getUser_id()));
+    	        newUserfarm.setFarm(farmService.getFarmById(farmId));
+    	        newUserfarm.setUser(userService.getUserById(userId));
     	        userFarmService.createUserfarm(newUserfarm);
     		}
     	}

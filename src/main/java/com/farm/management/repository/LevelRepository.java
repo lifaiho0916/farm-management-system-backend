@@ -2,6 +2,8 @@ package com.farm.management.repository;
 
 import com.farm.management.model.Level;
 import com.farm.management.model.LevelName;
+import com.farm.management.model.User;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
