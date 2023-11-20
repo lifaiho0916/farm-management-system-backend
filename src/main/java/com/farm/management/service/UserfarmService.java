@@ -7,6 +7,12 @@ public interface UserfarmService {
     Userfarm createUserfarm(Userfarm userfarm);
 
     Userfarm updateUserfarm(Userfarm userfarm);
+    
+    boolean isUserIdExist(Long userId);
+    
+    void updateUserFarmByUserId(Long userId, Long farmId);
 
     void deleteUserFarmByFarmId(Long farmId);
+    
+    void deleteUserFarmByUserId(Long userId);
 }

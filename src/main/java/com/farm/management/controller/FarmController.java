@@ -50,7 +50,7 @@ public class FarmController {
         return new ResponseEntity<>(farm, HttpStatus.OK);
     }
 
-    // Build Get All Users REST API
+    // Build Get All Farms REST API
     // http://localhost:8080/api/farms
     @GetMapping("farms/{id}")
     @PreAuthorize("isAuthenticated()")
@@ -59,10 +59,9 @@ public class FarmController {
         return new ResponseEntity<>(farms, HttpStatus.OK);
     }
 
-    // Build Update User REST API
+    // Build Update Farm REST API
     @PutMapping("farm/{id}")
     @PreAuthorize("isAuthenticated()")
-    // http://localhost:8080/api/users/1
     public ResponseEntity<Farm> updateFarm(@PathVariable("id") Long id,
                                            @RequestBody Farm farm){
         farm.setId(id);
@@ -70,7 +69,7 @@ public class FarmController {
         return new ResponseEntity<>(updatedFarm, HttpStatus.OK);
     }
 
-    // Build Delete User REST API
+    // Build Delete Farm REST API
     @DeleteMapping("farm/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> deleteFarm(@PathVariable("id") Long id){

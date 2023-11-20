@@ -22,4 +22,5 @@ public class FarmsownerServiceImpl implements FarmsownerService {
     public void deleteFarmonwerByFarmId(Long farmId) {
         farmownerRepository.deleteFarmOwnerByFarmId(farmId);
     }
+    
 }

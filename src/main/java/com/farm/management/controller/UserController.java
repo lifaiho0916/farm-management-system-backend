@@ -108,17 +108,28 @@ public class UserController {
     @DeleteMapping("user/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long userId){
+    	userFarmService.deleteUserFarmByUserId(userId);
         userService.deleteUser(userId);
         return new ResponseEntity<>("User successfully deleted!", HttpStatus.OK);
     }
 
     @PostMapping("/user/assign-farm")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Userfarm> createUserfarm(@Valid @RequestBody AssignRequest assignRequest){
-        Userfarm newUserfarm = new Userfarm();
-        newUserfarm.setFarm(farmService.getFarmById(assignRequest.getFarm_id()));
-        newUserfarm.setUser(userService.getUserById(assignRequest.getUser_id()));
-        Userfarm savedUserFarm = userFarmService.createUserfarm(newUserfarm);
-        return new ResponseEntity<>(savedUserFarm, HttpStatus.CREATED);
+    public ResponseEntity<String> createUserfarm(@Valid @RequestBody AssignRequest assignRequest){
+    	Long farmId = assignRequest.getFarm_id();
+    	Long userId = assignRequest.getUser_id();
+    	if(farmId == 0) {
+    		userFarmService.deleteUserFarmByUserId(userId);
+    	} else {
+    		if(userFarmService.isUserIdExist(userId)) {
+    			userFarmService.updateUserFarmByUserId(userId, farmId);
+    		} else {
+    			Userfarm newUserfarm = new Userfarm();
+    	        newUserfarm.setFarm(farmService.getFarmById(assignRequest.getFarm_id()));
+    	        newUserfarm.setUser(userService.getUserById(assignRequest.getUser_id()));
+    	        userFarmService.createUserfarm(newUserfarm);
+    		}
+    	}
+    	return new ResponseEntity<>("Farm has been allocated successfully", HttpStatus.CREATED);
     }
 }
