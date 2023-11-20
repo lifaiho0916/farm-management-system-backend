@@ -1,10 +1,10 @@
 package com.farm.management.service;
 
-import com.farm.management.model.Userfarm;
+import com.farm.management.model.UserFarm;
 
-public interface UserfarmService {
+public interface UserFarmService {
 
-    Userfarm createUserfarm(Userfarm userfarm);
+    UserFarm createUserfarm(UserFarm userfarm);
     
     boolean isUserIdExist(Long userId);
     

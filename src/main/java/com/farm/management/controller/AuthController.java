@@ -1,14 +1,13 @@
 package com.farm.management.controller;
 
 import com.farm.management.exception.AppException;
-import com.farm.management.model.LevelName;
 import com.farm.management.model.User;
-import com.farm.management.model.Level;
+import com.farm.management.model.UserLevel;
 import com.farm.management.payload.ApiResponse;
 import com.farm.management.payload.JwtAuthenticationResponse;
 import com.farm.management.payload.LoginRequest;
 import com.farm.management.payload.SignUpRequest;
-import com.farm.management.repository.LevelRepository;
+import com.farm.management.repository.UserLevelRepository;
 import com.farm.management.repository.UserRepository;
 import com.farm.management.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,20 +26,19 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
     @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    LevelRepository roleRepository;
+    private UserLevelRepository userLevelRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -75,17 +73,20 @@ public class AuthController {
             return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
+        
+        System.out.println(signUpRequest.getEmail() + ' ' + signUpRequest.getName() + ' ' + signUpRequest.getPassword());
 
         // Creating user's account
         User user = new User(signUpRequest.getName(),
                 signUpRequest.getEmail(), signUpRequest.getPassword());
-
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        Level userRole = roleRepository.findByName(LevelName.ADMIN)
-                .orElseThrow(() -> new AppException("User Role not set."));
 
-        System.out.println("userRole: " + userRole + "-------------------");
-        user.setRoles(Collections.singleton(userRole));
+
+        System.out.println("test ++++++:" + userLevelRepository);
+        UserLevel userRole = userLevelRepository.findByDescription("ADMIN")
+                .orElseThrow(() -> new AppException("User Role not set."));
+        System.out.println("test ++++++:" + userRole.getDescription());
+        user.setUserLevel(userRole);
         User result = userRepository.save(user);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/users/{username}")

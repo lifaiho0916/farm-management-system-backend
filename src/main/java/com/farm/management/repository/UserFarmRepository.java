@@ -1,6 +1,6 @@
 package com.farm.management.repository;
 
-import com.farm.management.model.Userfarm;
+import com.farm.management.model.UserFarm;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface UserfarmRepository extends JpaRepository<Userfarm, Long> {
+public interface UserFarmRepository extends JpaRepository<UserFarm, Long> {
 	@Modifying
 	@Transactional
 	@Query(value = "DELETE FROM tb_user_permission WHERE id_farm = :farmId", nativeQuery = true)
@@ -27,5 +27,5 @@ public interface UserfarmRepository extends JpaRepository<Userfarm, Long> {
 	void deleteUserFarmByUserId(@Param("userId") Long userId);
 	
 	@Query(value = "SELECT * FROM tb_user_permission WHERE id_users = :userId", nativeQuery = true)
-	List<Userfarm> getUserFarmByUserId(@Param("userId") Long userId);
+	List<UserFarm> getUserFarmByUserId(@Param("userId") Long userId);
 }

@@ -4,9 +4,9 @@ import com.farm.management.model.*;
 import com.farm.management.security.CurrentUser;
 import com.farm.management.security.UserPrincipal;
 import com.farm.management.service.FarmService;
-import com.farm.management.service.FarmsownerService;
+import com.farm.management.service.FarmsOwnerService;
 import com.farm.management.service.UserService;
-import com.farm.management.service.UserfarmService;
+import com.farm.management.service.UserFarmService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,17 +28,17 @@ public class FarmController {
     private UserService userService;
 
     @Autowired
-    private UserfarmService userfarmService;
+    private UserFarmService userfarmService;
 
     @Autowired
-    private FarmsownerService farmsownerService;
+    private FarmsOwnerService farmsownerService;
 
     @PostMapping("/farm")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Farm> createFarm(@RequestBody Farm farm, @CurrentUser UserPrincipal currentUser){
         Farm savedFarm = farmService.createFarm(farm);
         User user = userService.getUserById(currentUser.getId());
-        Farmsowner farmsowner = new Farmsowner(savedFarm, user);
+        FarmsOwner farmsowner = new FarmsOwner(savedFarm, user);
         farmsownerService.createFarmowner(farmsowner);
         return new ResponseEntity<>(savedFarm, HttpStatus.CREATED);
     }

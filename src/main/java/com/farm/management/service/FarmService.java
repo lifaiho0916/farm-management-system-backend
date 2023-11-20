@@ -1,7 +1,7 @@
 package com.farm.management.service;
 
 import com.farm.management.model.Farm;
-import com.farm.management.model.Farmsowner;
+import com.farm.management.model.FarmsOwner;
 
 import java.util.List;
 

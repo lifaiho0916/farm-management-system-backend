@@ -10,23 +10,25 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tb_farms_owner")
-public class Farmsowner {
-
-    @Id
+@Table(name = "tb_user_permission")
+public class UserFarm  {
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_farm", nullable = false)
-    private Farm farm;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_users", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_users")
     private User user;
 
-    public Farmsowner(Farm farm, User user) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_farm")
+    private Farm farm;
+
+    private String description;
+
+    public UserFarm(Farm farm, User user, String description) {
         this.farm = farm;
         this.user = user;
+        this.description = description;
     }
 }

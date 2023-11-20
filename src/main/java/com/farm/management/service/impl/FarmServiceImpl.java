@@ -1,9 +1,9 @@
 package com.farm.management.service.impl;
 
 import com.farm.management.model.Farm;
-import com.farm.management.model.Farmsowner;
+import com.farm.management.model.FarmsOwner;
 import com.farm.management.repository.FarmRepository;
-import com.farm.management.repository.FarmownerRepository;
+import com.farm.management.repository.FarmOwnerRepository;
 import com.farm.management.service.FarmService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +18,7 @@ import java.util.Optional;
 public class FarmServiceImpl implements FarmService {
 
     private FarmRepository farmRepository;
-    private FarmownerRepository farmownerRepository;
+    private FarmOwnerRepository farmownerRepository;
 
     @Override
     public Farm createFarm(Farm farm) {

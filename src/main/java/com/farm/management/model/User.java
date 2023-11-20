@@ -1,6 +1,8 @@
 package com.farm.management.model;
 
 import com.farm.management.model.audit.DateAudit;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
@@ -27,6 +29,11 @@ public class User extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user_level")
+    private UserLevel userLevel;
 
     @NotBlank
     @Size(max = 40)
@@ -47,6 +54,8 @@ public class User extends DateAudit {
     private String name;
 
     private Double doc;
+    
+    private Double level;
 
     private String address;
     private String city;
@@ -54,12 +63,6 @@ public class User extends DateAudit {
 
     private Long zipcode;
     private Long created_by;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "tb_user_level",
-            joinColumns = @JoinColumn(name = "id_users"),
-            inverseJoinColumns = @JoinColumn(name = "id_level"))
-    private Set<Level> roles = new HashSet<>();
     
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "tb_user_permission",

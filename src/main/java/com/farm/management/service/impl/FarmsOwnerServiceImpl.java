@@ -1,8 +1,8 @@
 package com.farm.management.service.impl;
 
-import com.farm.management.model.Farmsowner;
-import com.farm.management.repository.FarmownerRepository;
-import com.farm.management.service.FarmsownerService;
+import com.farm.management.model.FarmsOwner;
+import com.farm.management.repository.FarmOwnerRepository;
+import com.farm.management.service.FarmsOwnerService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 @Service
 @Data
 @AllArgsConstructor
-public class FarmsownerServiceImpl implements FarmsownerService {
+public class FarmsOwnerServiceImpl implements FarmsOwnerService {
 
-    private FarmownerRepository farmownerRepository;
+    private FarmOwnerRepository farmownerRepository;
 
-    public Farmsowner createFarmowner(Farmsowner farmsowner) {
+    public FarmsOwner createFarmowner(FarmsOwner farmsowner) {
         return farmownerRepository.save(farmsowner);
     }
 

@@ -1,8 +1,8 @@
 package com.farm.management.service.impl;
 
-import com.farm.management.model.Userfarm;
-import com.farm.management.repository.UserfarmRepository;
-import com.farm.management.service.UserfarmService;
+import com.farm.management.model.UserFarm;
+import com.farm.management.repository.UserFarmRepository;
+import com.farm.management.service.UserFarmService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,17 +13,17 @@ import org.springframework.stereotype.Service;
 @Service
 @Data
 @AllArgsConstructor
-public class UserfarmServiceImpl implements UserfarmService {
+public class UserFarmServiceImpl implements UserFarmService {
 
-    private UserfarmRepository userfarmRepository;
+    private UserFarmRepository userfarmRepository;
 
-    public Userfarm createUserfarm(Userfarm userfarm) {
+    public UserFarm createUserfarm(UserFarm userfarm) {
         return userfarmRepository.save(userfarm);
     }
     
     @Override
     public boolean isUserIdExist(Long userId) {
-    	List<Userfarm> userfarms = userfarmRepository.getUserFarmByUserId(userId);
+    	List<UserFarm> userfarms = userfarmRepository.getUserFarmByUserId(userId);
     	return !userfarms.isEmpty();
     }
     
