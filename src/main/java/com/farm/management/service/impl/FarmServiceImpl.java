@@ -43,8 +43,8 @@ public class FarmServiceImpl implements FarmService {
     }
 
     @Override
-    public void deleteFarm(Long farmId) {
-        farmRepository.deleteById(farmId);
+    public void deleteFarm(Long id) {
+        farmRepository.deleteById(id);
     }
 
     public List<Farm> findById_user(Long id){

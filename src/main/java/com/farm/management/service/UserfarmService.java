@@ -8,5 +8,5 @@ public interface UserfarmService {
 
     Userfarm updateUserfarm(Userfarm userfarm);
 
-    void deleteUserfarm(Long farmId);
+    void deleteUserFarmByFarmId(Long farmId);
 }

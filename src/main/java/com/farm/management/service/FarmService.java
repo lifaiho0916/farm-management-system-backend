@@ -17,5 +17,4 @@ public interface FarmService {
 
     void deleteFarm(Long farmId);
 
-
 }

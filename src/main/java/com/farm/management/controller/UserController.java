@@ -39,6 +39,9 @@ public class UserController {
 
     @Autowired
     private FarmService farmService;
+    
+    @Autowired
+    private UserfarmService userFarmService;
 
     @Autowired
     LevelRepository roleRepository;
@@ -109,13 +112,13 @@ public class UserController {
         return new ResponseEntity<>("User successfully deleted!", HttpStatus.OK);
     }
 
-    @PostMapping("/user/assign_farm")
+    @PostMapping("/user/assign-farm")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Userfarm> createUserfarm(@Valid @RequestBody AssignRequest assignRequest){
-        Userfarm savedUserfarm = new Userfarm();
-        savedUserfarm.setFarm(farmService.getFarmById(assignRequest.getFarm_id()));
-        savedUserfarm.setUser(userService.getUserById(assignRequest.getUser_id()));
-
-        return new ResponseEntity<>(savedUserfarm, HttpStatus.CREATED);
+        Userfarm newUserfarm = new Userfarm();
+        newUserfarm.setFarm(farmService.getFarmById(assignRequest.getFarm_id()));
+        newUserfarm.setUser(userService.getUserById(assignRequest.getUser_id()));
+        Userfarm savedUserFarm = userFarmService.createUserfarm(newUserfarm);
+        return new ResponseEntity<>(savedUserFarm, HttpStatus.CREATED);
     }
 }

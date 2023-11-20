@@ -1,6 +1,5 @@
 package com.farm.management.service.impl;
 
-import com.farm.management.model.User;
 import com.farm.management.model.Userfarm;
 import com.farm.management.repository.UserfarmRepository;
 import com.farm.management.service.UserfarmService;
@@ -19,7 +18,7 @@ public class UserfarmServiceImpl implements UserfarmService {
         return userfarmRepository.save(userfarm);
     }
 
-    public  Userfarm updateUserfarm(Userfarm userfarm){
+    public Userfarm updateUserfarm(Userfarm userfarm){
         Userfarm existingUserfarm = userfarmRepository.findById(userfarm.getId()).get();
         existingUserfarm.setFarm(userfarm.getFarm());
         existingUserfarm.setUser(userfarm.getUser());
@@ -28,7 +27,7 @@ public class UserfarmServiceImpl implements UserfarmService {
         return updatedUserfarm;
     };
     @Override
-    public void deleteUserfarm(Long farmId) {
-        userfarmRepository.deleteById(farmId);
+    public void deleteUserFarmByFarmId(Long farmId) {
+        userfarmRepository.deleteUserFarmByFarmId(farmId);
     }
 }

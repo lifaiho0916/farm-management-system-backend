@@ -75,8 +75,8 @@ public class FarmController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> deleteFarm(@PathVariable("id") Long id){
         farmsownerService.deleteFarmonwerByFarmId(id);
+        userfarmService.deleteUserFarmByFarmId(id);
         farmService.deleteFarm(id);
-//        userfarmService.deleteUserfarmByFarmId(id);
         return new ResponseEntity<>("User successfully deleted!", HttpStatus.OK);
     }
 }
