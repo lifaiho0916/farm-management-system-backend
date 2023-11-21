@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.30</version>
+			<version>1.18.30</version><!--$NO-MVN-MAN-VER$-->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -51,8 +51,13 @@
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
-			<version>1.5.7</version>
+			<version>1.5.7</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
+		 <dependency>
+            <groupId>com.stripe</groupId>
+            <artifactId>stripe-java</artifactId>
+            <version>22.29.0</version>
+        </dependency>
 
 		<!-- For Working with Json Web Tokens (JWT) -->
 		<dependency>
