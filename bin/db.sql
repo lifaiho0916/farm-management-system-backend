@@ -797,7 +797,7 @@ CREATE TABLE `tb_user_permission` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_users` int(10) unsigned NOT NULL,
   `id_farm` int(10) unsigned NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `decription` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_permission_FKIndex1` (`id_farm`),
   KEY `user_permission_FKIndex2` (`id_users`),
