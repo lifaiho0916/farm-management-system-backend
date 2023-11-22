@@ -816,6 +816,33 @@ LOCK TABLES `tb_user_permission` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_subscriptions`
+--
+
+DROP TABLE IF EXISTS `tb_subscriptions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_subscriptions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_users` int(10) unsigned NOT NULL,
+  `subscription_id` varchar(255) DEFAULT NULL,
+  `customer_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `subscriptions_FKIndex1` (`id_users`),
+  CONSTRAINT `tb_subscriptions_ibfk_1` FOREIGN KEY (`id_users`) REFERENCES `tb_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_subscriptions`
+--
+
+LOCK TABLES `tb_subscriptions` WRITE;
+/*!40000 ALTER TABLE `tb_subscriptions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_subscriptions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_users`
 --
 

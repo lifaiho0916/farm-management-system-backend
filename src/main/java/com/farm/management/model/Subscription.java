@@ -18,15 +18,15 @@ public class Subscription {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_farm", nullable = false)
-    private Farm farm;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_users", nullable = false)
     private User user;
+    
+    private String subscription_id;
+    private String customer_id;
 
-    public Subscription(Farm farm, User user) {
-        this.farm = farm;
+    public Subscription(User user, String subscription_id, String customer_id) {
         this.user = user;
+        this.subscription_id = subscription_id;
+        this.customer_id = customer_id;
     }
 }
