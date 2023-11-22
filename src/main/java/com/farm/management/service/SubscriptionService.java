@@ -1,12 +1,17 @@
 package com.farm.management.service;
 
-import com.farm.management.model.Subscription;
-
-import java.util.List;
+import com.farm.management.model.Subscriptions;
+import com.farm.management.payload.CustomerResponse;
 
 public interface SubscriptionService {
 
-    Subscription createSubscription(Subscription subscription);
+    void updateSubscription(String plan, Long userId);
+    
+    Subscriptions getSubscriptionByUserId(Long userId);
+    
+    CustomerResponse updatePayment(String token, String holder, Long userId, String email);
+    
+    CustomerResponse getCardInfo(Long userId);
 
     void deleteSubscription(Long id);
 }
