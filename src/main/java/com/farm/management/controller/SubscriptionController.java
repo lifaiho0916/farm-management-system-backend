@@ -31,8 +31,7 @@ public class SubscriptionController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Subscriptions> getSubscription(@CurrentUser UserPrincipal currentUser) {
     	Subscriptions subscription = subscriptionService.getSubscriptionByUserId(currentUser.getId());
-    	if(subscription != null) return new ResponseEntity<>(subscription, HttpStatus.OK);
-    	else return null;
+    	return new ResponseEntity<>(subscription, HttpStatus.OK);
     }
 	
 	

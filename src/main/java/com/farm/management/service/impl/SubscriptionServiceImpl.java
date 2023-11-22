@@ -1,10 +1,5 @@
 package com.farm.management.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.stereotype.Service;
 
 import com.farm.management.model.Subscriptions;
@@ -39,7 +34,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     			    .setToken(token)
     			    .build())
     			  .build();
-    	
     	try {
     		PaymentMethod paymentMethod = PaymentMethod.create(paramsBuilder);
     	    Subscriptions subscription = subscriptionRepository.getByUserId(userId);
@@ -79,9 +73,10 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         	    			.build();
         	    customer.update(updateParams);
     	    	User user = userRepository.getById(userId);
-    	    	Subscriptions subscripiton = new Subscriptions();
-    	    	subscripiton.setCustomer_id(customer.getId());
-    	    	subscripiton.setUser(user);
+    	    	Subscriptions newSubscripiton = new Subscriptions();
+    	    	newSubscripiton.setCustomer_id(customer.getId());
+    	    	newSubscripiton.setUser(user);
+    	    	subscriptionRepository.save(newSubscripiton);
     	    } 
 			CustomerResponse customerResponse = new CustomerResponse();
 			customerResponse.setType(paymentMethod.getCard().getBrand());
