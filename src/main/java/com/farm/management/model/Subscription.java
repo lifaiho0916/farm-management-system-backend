@@ -23,10 +23,12 @@ public class Subscription {
     
     private String subscription_id;
     private String customer_id;
+    private String subscriptionPlan;
 
-    public Subscription(User user, String subscription_id, String customer_id) {
+    public Subscription(User user, String subscription_id, String customer_id, String subscripitonPlan) {
         this.user = user;
         this.subscription_id = subscription_id;
         this.customer_id = customer_id;
+        this.subscriptionPlan = subscripitonPlan;
     }
 }
