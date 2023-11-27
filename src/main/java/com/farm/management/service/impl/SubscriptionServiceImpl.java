@@ -73,7 +73,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         	    			.build();
         	    customer.update(updateParams);
     	    	User user = userRepository.getById(userId);
-    	    	Subscriptions newSubscripiton = new Subscriptions();
+    	    	Subscriptions newSubscripiton = new Subscriptions(user, email, email);
     	    	newSubscripiton.setCustomer_id(customer.getId());
     	    	newSubscripiton.setUser(user);
     	    	subscriptionRepository.save(newSubscripiton);
