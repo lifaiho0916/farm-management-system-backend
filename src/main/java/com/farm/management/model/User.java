@@ -54,8 +54,6 @@ public class User extends DateAudit {
     private String name;
 
     private Double doc;
-    
-    private Double level;
 
     private String address;
     private String city;

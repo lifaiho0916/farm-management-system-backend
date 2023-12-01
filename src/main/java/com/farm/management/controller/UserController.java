@@ -54,7 +54,7 @@ public class UserController {
     @GetMapping("user/me")
     @PreAuthorize("isAuthenticated()")
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        return new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
+        return new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName(), currentUser.getLevel());
     }
     
     @PostMapping("user")

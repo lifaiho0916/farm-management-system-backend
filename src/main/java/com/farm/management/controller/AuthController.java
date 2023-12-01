@@ -88,6 +88,7 @@ public class AuthController {
         UserLevel userRole = userLevelRepository.findByDescription("ADMIN")
                 .orElseThrow(() -> new AppException("User Role not set."));
         user.setUserLevel(userRole);
+        System.out.println("///////////////////////" + userRole);
         User result = userRepository.save(user);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/users/{username}")
