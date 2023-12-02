@@ -62,6 +62,7 @@ public class User extends DateAudit {
     private Long zipcode;
     private Long created_by;
     
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "tb_user_permission",
             joinColumns = @JoinColumn(name = "id_users"),

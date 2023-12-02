@@ -28,4 +28,7 @@ public interface UserFarmRepository extends JpaRepository<UserFarm, Long> {
 	
 	@Query(value = "SELECT * FROM tb_user_permission WHERE id_users = :userId", nativeQuery = true)
 	List<UserFarm> getUserFarmByUserId(@Param("userId") Long userId);
+	
+	@Query(value = "SELECT * FROM tb_user_permission WHERE id_users = :userId", nativeQuery = true)
+	UserFarm findUserFarmByUserId(@Param("userId") Long userId);
 }

@@ -75,11 +75,9 @@ public class AuthController {
 //        }
 
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity<Object>(new ApiResponse(false, "Email Address already in use!"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"), 
+            		HttpStatus.BAD_REQUEST);
         }
-        
-        System.out.println(signUpRequest.getEmail() + ' ' + signUpRequest.getName() + ' ' + signUpRequest.getPassword());
-
         // Creating user's account
         User user = new User(signUpRequest.getName(),
                 signUpRequest.getEmail(), signUpRequest.getPassword());

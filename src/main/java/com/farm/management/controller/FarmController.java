@@ -1,6 +1,7 @@
 package com.farm.management.controller;
 
 import com.farm.management.model.*;
+import com.farm.management.repository.UserFarmRepository;
 import com.farm.management.security.CurrentUser;
 import com.farm.management.security.UserPrincipal;
 import com.farm.management.service.FarmService;
@@ -23,6 +24,9 @@ public class FarmController {
 
     @Autowired
     private FarmService farmService;
+    
+    @Autowired
+    private UserFarmRepository userFarmRepository;
 
     @Autowired
     private UserService userService;
@@ -62,8 +66,7 @@ public class FarmController {
     // Build Update Farm REST API
     @PutMapping("farm/{id}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Farm> updateFarm(@PathVariable("id") Long id,
-                                           @RequestBody Farm farm){
+    public ResponseEntity<Farm> updateFarm(@PathVariable("id") Long id, @RequestBody Farm farm){
         farm.setId(id);
         Farm updatedFarm = farmService.updateFarm(farm);
         return new ResponseEntity<>(updatedFarm, HttpStatus.OK);
@@ -77,5 +80,15 @@ public class FarmController {
         userfarmService.deleteUserFarmByFarmId(id);
         farmService.deleteFarm(id);
         return new ResponseEntity<>("User successfully deleted!", HttpStatus.OK);
+    }
+    
+    @GetMapping("user-farm")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Farm> getUserFarmByUserId(@CurrentUser UserPrincipal currentUser){
+    	System.out.println(currentUser.getId());
+        UserFarm userFarm = userFarmRepository.findUserFarmByUserId(currentUser.getId());
+        Farm farm = userFarm.getFarm();
+        System.out.println(farm);
+        return new ResponseEntity<>(farm, HttpStatus.OK);
     }
 }
