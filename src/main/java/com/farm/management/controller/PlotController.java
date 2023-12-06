@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,8 +37,7 @@ public class PlotController {
 	private FarmService farmService;
 	
 	// Build Get All Users REST API
-    
-	@PostMapping("/new-plot")
+	@PostMapping("/plot")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Plot> createPlot(@RequestBody PlotRequest plotRequest, @CurrentUser UserPrincipal currentUser){
         Farm savedFarm = farmService.getFarmById(plotRequest.getFarmId());
@@ -50,15 +50,13 @@ public class PlotController {
         Plot savePlot = plotService.createPlot(plot);
         return new ResponseEntity<>(savePlot, HttpStatus.CREATED);
 	}
-	
     
     @GetMapping("farm-plots/{id}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<Plot>> findByCreated_by(@PathVariable("id") Long id){
+    public ResponseEntity<List<Plot>> findByFarmId(@PathVariable("id") Long id){
         List<Plot> plots = plotService.getPlotByFarmId(id);
         return new ResponseEntity<>(plots, HttpStatus.OK);
     }
-    
     
     @GetMapping("owner-plots")
     @PreAuthorize("isAuthenticated()")
@@ -67,14 +65,20 @@ public class PlotController {
         return new ResponseEntity<>(plots, HttpStatus.OK);
     }
     
-    
-    @PutMapping("update-plot/{id}")
+    @PutMapping("plot/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Plot> updatePlot(@PathVariable("id") Long plotId,
                                            @RequestBody Plot plot){
         plot.setId(plotId);
         Plot updatedPlot = plotService.updatePlot(plot);
         return new ResponseEntity<>(updatedPlot, HttpStatus.OK);
+    }
+    
+    @DeleteMapping("plot/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<String> deletePlot(@PathVariable("id") Long plotId){
+        plotService.deletePlot(plotId);
+        return new ResponseEntity<>("Plot successfully deleted!", HttpStatus.OK);
     }
 
 }

@@ -37,7 +37,7 @@ public class ProductionCropController {
 	
 	// Build Get All Users REST API
     
-	@PostMapping("/new-productionCrop")
+	@PostMapping("/productCrop")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ProductionCrop> createPlot(@RequestBody ProductionCropRequest productionCropRequest, @CurrentUser UserPrincipal currentUser){
         Farm savedFarm = farmService.getFarmById(productionCropRequest.getFarmId());
@@ -49,15 +49,15 @@ public class ProductionCropController {
 	}
 	
     
-    @GetMapping("productionCrop/{id}")
+    @GetMapping("productCrops/{id}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<ProductionCrop>> findByCreated_by(@PathVariable("id") Long id){
+    public ResponseEntity<List<ProductionCrop>> findByFarmId(@PathVariable("id") Long id){
         List<ProductionCrop> productionCrop = productionCropService.getProductionCropByFarmId(id);
         return new ResponseEntity<>(productionCrop, HttpStatus.OK);
     }
     
     
-    @GetMapping("owner-productionCrops")
+    @GetMapping("owner-productCrops")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<ProductionCrop>> getProductionCropByUserId(@CurrentUser UserPrincipal currentUser){
         List<ProductionCrop> productionCrop = productionCropService.getProductionCropByUserId(currentUser.getId());
@@ -65,7 +65,7 @@ public class ProductionCropController {
     }
     
     
-    @PutMapping("update-productionCrop/{id}")
+    @PutMapping("productCrop/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ProductionCrop> updateProductionCrop(@PathVariable("id") Long productionCropId,
                                            @RequestBody ProductionCrop productionCrop){
