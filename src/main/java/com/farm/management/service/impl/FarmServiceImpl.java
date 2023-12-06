@@ -1,7 +1,6 @@
 package com.farm.management.service.impl;
 
 import com.farm.management.model.Farm;
-import com.farm.management.model.FarmsOwner;
 import com.farm.management.repository.FarmRepository;
 import com.farm.management.repository.FarmOwnerRepository;
 import com.farm.management.service.FarmService;

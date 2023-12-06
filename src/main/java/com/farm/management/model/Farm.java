@@ -1,6 +1,5 @@
 package com.farm.management.model;
 
-import com.farm.management.model.audit.DateAudit;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +11,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @Table(name = "tb_farm")
-public class Farm extends DateAudit {
+public class Farm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

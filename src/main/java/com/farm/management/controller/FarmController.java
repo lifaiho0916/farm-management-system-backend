@@ -54,16 +54,13 @@ public class FarmController {
         return new ResponseEntity<>(farm, HttpStatus.OK);
     }
 
-    // Build Get All Farms REST API
-    // http://localhost:8080/api/farms
     @GetMapping("farms/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<Farm>> findById_user(@PathVariable("id") Long id){
         List<Farm> farms = farmService.findById_user(id);
         return new ResponseEntity<>(farms, HttpStatus.OK);
     }
-
-    // Build Update Farm REST API
+    
     @PutMapping("farm/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Farm> updateFarm(@PathVariable("id") Long id, @RequestBody Farm farm){

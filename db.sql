@@ -461,7 +461,7 @@ CREATE TABLE `tb_production_sales` (
   PRIMARY KEY (`id`),
   KEY `production_sales_FKIndex1` (`id_production_crop`),
   KEY `production_sales_FKIndex2` (`id_suppliers`),
-  CONSTRAINT `tb_production_sales_ibfk_1` FOREIGN KEY (`id_production_crop`) REFERENCES `tb_prodution_crop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `tb_production_sales_ibfk_1` FOREIGN KEY (`id_production_crop`) REFERENCES `tb_production_crop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tb_production_sales_ibfk_2` FOREIGN KEY (`id_suppliers`) REFERENCES `tb_suppliers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -508,13 +508,13 @@ LOCK TABLES `tb_products` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tb_prodution_crop`
+-- Table structure for table `tb_production_crop`
 --
 
-DROP TABLE IF EXISTS `tb_prodution_crop`;
+DROP TABLE IF EXISTS `tb_production_crop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tb_prodution_crop` (
+CREATE TABLE `tb_production_crop` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_unit` int(10) unsigned NOT NULL,
   `id_farm` int(10) unsigned NOT NULL,
@@ -524,20 +524,20 @@ CREATE TABLE `tb_prodution_crop` (
   PRIMARY KEY (`id`),
   KEY `results_crop_FKIndex1` (`id_crop`),
   KEY `results_crop_FKIndex2` (`id_farm`),
-  KEY `prodution_crop_FKIndex3` (`id_unit`),
-  CONSTRAINT `tb_prodution_crop_ibfk_1` FOREIGN KEY (`id_crop`) REFERENCES `tb_crop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `tb_prodution_crop_ibfk_2` FOREIGN KEY (`id_farm`) REFERENCES `tb_farm` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `tb_prodution_crop_ibfk_3` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `production_crop_FKIndex3` (`id_unit`),
+  CONSTRAINT `tb_production_crop_ibfk_1` FOREIGN KEY (`id_crop`) REFERENCES `tb_crop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `tb_production_crop_ibfk_2` FOREIGN KEY (`id_farm`) REFERENCES `tb_farm` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `tb_production_crop_ibfk_3` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tb_prodution_crop`
+-- Dumping data for table `tb_production_crop`
 --
 
-LOCK TABLES `tb_prodution_crop` WRITE;
-/*!40000 ALTER TABLE `tb_prodution_crop` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tb_prodution_crop` ENABLE KEYS */;
+LOCK TABLES `tb_production_crop` WRITE;
+/*!40000 ALTER TABLE `tb_production_crop` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_production_crop` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -862,7 +862,7 @@ CREATE TABLE `tb_users` (
   `phone` varchar(255) DEFAULT NULL,
   `zipcode` decimal(10,0) DEFAULT NULL,
   `level` decimal(15,0) DEFAULT NULL,
-  `creatd_by` int(10) unsigned DEFAULT NULL,
+  `created_by` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `users_FKIndex1` (`id`),
   CONSTRAINT `tb_users_ibfk_1` FOREIGN KEY (`id_user_level`) REFERENCES `tb_user_level` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION

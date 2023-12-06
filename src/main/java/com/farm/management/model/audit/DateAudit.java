@@ -13,7 +13,6 @@ import java.io.Serializable;
 import java.time.Instant;
 
 @MappedSuperclass
-@Data
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(

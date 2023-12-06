@@ -4,12 +4,9 @@ import com.farm.management.model.User;
 import com.farm.management.repository.UserRepository;
 import com.farm.management.service.UserService;
 import lombok.AllArgsConstructor;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service

@@ -11,7 +11,6 @@ import javax.persistence.MappedSuperclass;
 
 
 @MappedSuperclass
-@Data
 @NoArgsConstructor
 @JsonIgnoreProperties(
         value = {"createdBy", "updatedBy"},
