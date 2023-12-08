@@ -3,7 +3,6 @@ package com.farm.management.service;
 import java.util.List;
 
 import com.farm.management.model.ProductCrop;
-import com.farm.management.model.User;
 
 public interface ProductCropService {
 	
