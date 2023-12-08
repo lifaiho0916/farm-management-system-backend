@@ -1,7 +1,5 @@
 package com.farm.management.model;
 
-import java.time.Instant;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,5 +27,5 @@ public class Crop {
     private Farm farm;
 	
 	private String description;
-	private Instant year;
+	private String year;
 }

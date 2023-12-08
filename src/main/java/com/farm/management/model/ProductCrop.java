@@ -1,5 +1,7 @@
 package com.farm.management.model;
 
+import java.time.Instant;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_production_crop")
-public class ProductionCrop {
+public class ProductCrop {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,11 +39,13 @@ public class ProductionCrop {
     private Crop crop;
     
     private String quantity;
+    private Instant date;
 
-    public ProductionCrop(Farm farm, Unit unit, Crop crop, String quantity) {
+    public ProductCrop(Farm farm, Unit unit, Crop crop, String quantity, Instant date) {
         this.farm = farm;
         this.unit = unit;
         this.crop = crop;
         this.quantity = quantity;
+        this.date = date;
     }
 }

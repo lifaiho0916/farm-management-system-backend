@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ProductionCropRequest {
+public class ProductCropRequest {
 	
 	private Long unitId;
 	private Long farmId;

@@ -140,7 +140,7 @@ CREATE TABLE `tb_crop` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_farm` int(10) unsigned NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `year` date DEFAULT NULL,
+  `year` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `crop_FKIndex1` (`id_farm`),
   CONSTRAINT `tb_crop_ibfk_1` FOREIGN KEY (`id_farm`) REFERENCES `tb_farm` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
