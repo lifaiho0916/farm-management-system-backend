@@ -861,7 +861,6 @@ CREATE TABLE `tb_users` (
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `zipcode` decimal(10,0) DEFAULT NULL,
-  `level` decimal(15,0) DEFAULT NULL,
   `created_by` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `users_FKIndex1` (`id`),

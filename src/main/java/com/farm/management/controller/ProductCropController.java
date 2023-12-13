@@ -19,8 +19,8 @@ import com.farm.management.model.Crop;
 import com.farm.management.model.Farm;
 import com.farm.management.model.ProductCrop;
 import com.farm.management.model.Unit;
-import com.farm.management.payload.CropRequest;
 import com.farm.management.payload.CropUpdateRequest;
+import com.farm.management.payload.ProductCropRequest;
 import com.farm.management.security.CurrentUser;
 import com.farm.management.security.UserPrincipal;
 import com.farm.management.service.CropService;
@@ -51,29 +51,29 @@ public class ProductCropController {
     
 	@PostMapping("/productCrop")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<ProductCrop> createPlot(@RequestBody CropRequest cropRequest, @CurrentUser UserPrincipal currentUser){
+    public ResponseEntity<ProductCrop> createPlot(@RequestBody ProductCropRequest productCropRequest, @CurrentUser UserPrincipal currentUser){
 		
-		System.out.println(cropRequest);
+		System.out.println(productCropRequest);
 		
-        Farm savedFarm = farmService.getFarmById(cropRequest.getFarmId());
+        Farm savedFarm = farmService.getFarmById(productCropRequest.getFarmId());
         
         Unit savedUnit = new Unit();
-        savedUnit.setDescription(cropRequest.getUnitDescription());
-        savedUnit.setType(cropRequest.getType());
+        savedUnit.setDescription(productCropRequest.getUnitDescription());
+        savedUnit.setType(productCropRequest.getType());
         Unit newUnit = unitService.createUnit(savedUnit);
         
         Crop savedCrop = new Crop();
         savedCrop.setFarm(savedFarm);
-        savedCrop.setDescription(cropRequest.getCropDescription());
-        savedCrop.setYear(cropRequest.getYear());
+        savedCrop.setDescription(productCropRequest.getCropDescription());
+        savedCrop.setYear(productCropRequest.getYear());
         Crop newCrop = cropService.createCrop(savedCrop);
         
         ProductCrop productionCrop = new ProductCrop();
         productionCrop.setFarm(savedFarm);
         productionCrop.setUnit(newUnit);
         productionCrop.setCrop(newCrop);
-        productionCrop.setQuantity(cropRequest.getQuantity());
-        productionCrop.setDate(cropRequest.getDate());
+        productionCrop.setQuantity(productCropRequest.getQuantity());
+        productionCrop.setDate(productCropRequest.getDate());
         ProductCrop saveProductCrop = productCropService.createProductionCrop(productionCrop);
         return new ResponseEntity<>(saveProductCrop, HttpStatus.CREATED);
 	}

@@ -28,4 +28,6 @@ public class Crop {
 	
 	private String description;
 	private String year;
+	private String start_date;
+	private String end_date;
 }

@@ -1,7 +1,5 @@
 package com.farm.management.payload;
 
-import java.time.Instant;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,11 +8,9 @@ import lombok.NoArgsConstructor;
 public class CropRequest {
 	
 	private Long farmId;
-	private String cropDescription;
+	private String description;
 	private String year;
-	private String unitDescription;
-	private String Type;
-	private String quantity;
-	private Instant date;
+	private String start_date;
+	private String end_date;
 
 }
