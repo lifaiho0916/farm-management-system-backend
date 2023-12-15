@@ -56,7 +56,7 @@ public class PayMethodController {
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<PaymentMethod> updateUser(@PathVariable("id") Long id,
 	                                       @RequestBody PaymentMethod payMethod){
-		payMethod.setId(payMethod.getId());
+		payMethod.setId(id);
 		PaymentMethod updatedPayMethod = payMethodService.updatePaymentMethod(payMethod);
 	    return new ResponseEntity<>(updatedPayMethod, HttpStatus.OK);
 	}

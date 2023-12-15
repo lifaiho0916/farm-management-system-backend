@@ -55,17 +55,15 @@ public class UnitController {
 	    return new ResponseEntity<>(unit, HttpStatus.OK);
 	}
 	
-	// Build Update User REST API
 	@PutMapping("unit/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<Unit> updateUser(@PathVariable("id") Long id,
 	                                       @RequestBody Unit unit){
-	    unit.setId(unit.getId());
+	    unit.setId(id);
 	    Unit updatedUnit = unitService.updateUnit(unit);
 	    return new ResponseEntity<>(updatedUnit, HttpStatus.OK);
 	}
 	
-	// Build Delete User REST API
 	@DeleteMapping("unit/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<String> deleteUser(@PathVariable("id") Long id){

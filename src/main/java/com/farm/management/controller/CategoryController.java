@@ -56,7 +56,7 @@ public class CategoryController {
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<Category> updateUser(@PathVariable("id") Long id,
 	                                       @RequestBody Category category){
-		category.setId(category.getId());
+		category.setId(id);
 	    Category updatedCategory = categoryService.updateCategory(category);
 	    return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
 	}

@@ -46,6 +46,8 @@ public class CropController {
         newCrop.setFarm(farm);
         newCrop.setDescription(cropRequest.getDescription());
         newCrop.setYear(cropRequest.getYear());
+        newCrop.setStart_date(cropRequest.getStart_date());
+        newCrop.setEnd_date(cropRequest.getEnd_date());
         Crop saveCrop = cropService.createCrop(newCrop);
         return new ResponseEntity<>(saveCrop, HttpStatus.CREATED);
 	}
