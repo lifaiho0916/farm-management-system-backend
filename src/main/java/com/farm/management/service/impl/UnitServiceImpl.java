@@ -1,5 +1,8 @@
 package com.farm.management.service.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.farm.management.model.Unit;
@@ -14,24 +17,35 @@ import lombok.Data;
 @AllArgsConstructor
 public class UnitServiceImpl implements UnitService {
 	
-	private UnitRepository usnitReqository;
+	private UnitRepository unitReqository;
 	
 	@Override
     public Unit createUnit(Unit unit) {
-        return usnitReqository.save(unit);
+        return unitReqository.save(unit);
+    }
+
+    @Override
+    public Unit getUnitById(Long id) {
+        Optional<Unit> optionalUnit = unitReqository.findById(id);
+        return optionalUnit.get();
+    }
+
+    @Override
+    public List<Unit> getAllUnits() {
+        return unitReqository.findAll();
     }
 
     @Override
     public Unit updateUnit(Unit unit) {
-    	Unit existingUnit = usnitReqository.findById(unit.getId()).get();
+    	Unit existingUnit = unitReqository.findById(unit.getId()).get();
     	existingUnit.setDescription(unit.getDescription());
     	existingUnit.setType(unit.getType());
-        return usnitReqository.save(existingUnit);
+        return unitReqository.save(existingUnit);
     }
 
     @Override
     public void deleteUnit(Long id) {
-    	usnitReqository.deleteById(id);
+    	unitReqository.deleteById(id);
     }
 
 }
