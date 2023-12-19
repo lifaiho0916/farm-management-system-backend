@@ -102,10 +102,11 @@ public class PurchaseDetailController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 	
-	@PutMapping("purchases/{id}")
+	@PutMapping("purchase/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<PurchaseDetail> updatePurchaseDetail(@PathVariable("id") Long id,
 	                                       @RequestBody PurchaseRequest purchaseRequest){
+		System.out.println(purchaseRequest);
 		PurchaseDetail setPurchaseDetail = purchaseDetailService.getPurchaseDetailById(id);
 		Purchase setPurchase = purchaseService.getPurchaseById(purchaseRequest.getPurchaseId());
 		Supplier setSupplier = supplierService.getSupplierById(purchaseRequest.getSupplierId());
