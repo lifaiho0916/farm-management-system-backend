@@ -43,7 +43,8 @@ public class ProductController {
 	
 	@PostMapping("product")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<Product> createUnit(@RequestBody ProductRequest productRequest, @CurrentUser UserPrincipal currentUser) {
+	public ResponseEntity<Product> createProduct(@RequestBody ProductRequest productRequest, @CurrentUser UserPrincipal currentUser) {
+		System.out.println(productRequest);
 		Product product = new Product();
 		Category setCategory = categoryService.getCategoryById(productRequest.getCategoryId());
 		Unit setUnit = unitService.getUnitById(productRequest.getUnitId());
@@ -60,7 +61,7 @@ public class ProductController {
 	
 	@GetMapping("product/{id}")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<Product> getUnitById(@PathVariable("id") Long id){
+	public ResponseEntity<Product> getProductById(@PathVariable("id") Long id){
 		Product product = productService.getProductById(id);
 	    return new ResponseEntity<>(product, HttpStatus.OK);
 	}
@@ -75,7 +76,7 @@ public class ProductController {
 	
 	@PutMapping("product/{id}")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<Product> updateUser(@PathVariable("id") Long id,
+	public ResponseEntity<Product> updateProduct(@PathVariable("id") Long id,
 	                                       @RequestBody ProductRequest productRequest){
 		Product setProduct = productService.getProductById(id);
 		Category setCategory = categoryService.getCategoryById(productRequest.getCategoryId());
@@ -92,7 +93,7 @@ public class ProductController {
 	
 	@DeleteMapping("product/{id}")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<String> deleteUser(@PathVariable("id") Long id){
+	public ResponseEntity<String> deleteProduct(@PathVariable("id") Long id){
 		productService.deleteProduct(id);
 	    return new ResponseEntity<>("Product successfully deleted!", HttpStatus.OK);
 	}

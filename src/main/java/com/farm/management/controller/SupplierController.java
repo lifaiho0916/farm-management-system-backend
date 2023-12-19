@@ -54,6 +54,13 @@ public class SupplierController {
         return new ResponseEntity<>(saveSupplier, HttpStatus.CREATED);
 	}
 	
+	@GetMapping("supplier/{id}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<Supplier> getProductById(@PathVariable("id") Long id){
+		Supplier result = supplierService.getSupplierById(id);
+	    return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
 	@GetMapping("suppliers/{id}")
     @PreAuthorize("isAuthenticated()")
 	public ResponseEntity<List<Supplier>> getSupplierByFarmId(@PathVariable("id") Long id){
