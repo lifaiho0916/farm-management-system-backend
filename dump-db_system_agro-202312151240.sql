@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: db_system_agro
 -- ------------------------------------------------------
--- Server version	11.2.1-MariaDB
+-- Server version	11.3.0-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -141,6 +141,8 @@ CREATE TABLE `tb_crop` (
   `id_farm` int(10) unsigned NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
+  `start_date` varchar(100) DEFAULT NULL,
+  `end_date` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `crop_FKIndex1` (`id_farm`),
   CONSTRAINT `tb_crop_ibfk_1` FOREIGN KEY (`id_farm`) REFERENCES `tb_farm` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -253,7 +255,7 @@ CREATE TABLE `tb_payment_method` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -262,6 +264,7 @@ CREATE TABLE `tb_payment_method` (
 
 LOCK TABLES `tb_payment_method` WRITE;
 /*!40000 ALTER TABLE `tb_payment_method` DISABLE KEYS */;
+INSERT INTO `tb_payment_method` VALUES (1,'Credit Card'),(2,'Debit Card'),(3,'PayPal'),(4,'Cash');
 /*!40000 ALTER TABLE `tb_payment_method` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,6 +445,39 @@ LOCK TABLES `tb_pragues` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_production_crop`
+--
+
+DROP TABLE IF EXISTS `tb_production_crop`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_production_crop` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_unit` int(10) unsigned NOT NULL,
+  `id_farm` int(10) unsigned NOT NULL,
+  `id_crop` int(10) unsigned NOT NULL,
+  `quantity` double DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `results_crop_FKIndex1` (`id_crop`),
+  KEY `results_crop_FKIndex2` (`id_farm`),
+  KEY `production_crop_FKIndex3` (`id_unit`),
+  CONSTRAINT `tb_production_crop_ibfk_1` FOREIGN KEY (`id_crop`) REFERENCES `tb_crop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `tb_production_crop_ibfk_2` FOREIGN KEY (`id_farm`) REFERENCES `tb_farm` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `tb_production_crop_ibfk_3` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_production_crop`
+--
+
+LOCK TABLES `tb_production_crop` WRITE;
+/*!40000 ALTER TABLE `tb_production_crop` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_production_crop` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_production_sales`
 --
 
@@ -505,39 +541,6 @@ CREATE TABLE `tb_products` (
 LOCK TABLES `tb_products` WRITE;
 /*!40000 ALTER TABLE `tb_products` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tb_products` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tb_production_crop`
---
-
-DROP TABLE IF EXISTS `tb_production_crop`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tb_production_crop` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_unit` int(10) unsigned NOT NULL,
-  `id_farm` int(10) unsigned NOT NULL,
-  `id_crop` int(10) unsigned NOT NULL,
-  `quantity` double DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `results_crop_FKIndex1` (`id_crop`),
-  KEY `results_crop_FKIndex2` (`id_farm`),
-  KEY `production_crop_FKIndex3` (`id_unit`),
-  CONSTRAINT `tb_production_crop_ibfk_1` FOREIGN KEY (`id_crop`) REFERENCES `tb_crop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `tb_production_crop_ibfk_2` FOREIGN KEY (`id_farm`) REFERENCES `tb_farm` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `tb_production_crop_ibfk_3` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tb_production_crop`
---
-
-LOCK TABLES `tb_production_crop` WRITE;
-/*!40000 ALTER TABLE `tb_production_crop` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tb_production_crop` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -707,6 +710,33 @@ LOCK TABLES `tb_stock_movement` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_subscriptions`
+--
+
+DROP TABLE IF EXISTS `tb_subscriptions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_subscriptions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_users` int(10) unsigned NOT NULL,
+  `subscription_id` varchar(255) DEFAULT NULL,
+  `customer_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `subscriptions_FKIndex1` (`id_users`),
+  CONSTRAINT `tb_subscriptions_ibfk_1` FOREIGN KEY (`id_users`) REFERENCES `tb_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_subscriptions`
+--
+
+LOCK TABLES `tb_subscriptions` WRITE;
+/*!40000 ALTER TABLE `tb_subscriptions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_subscriptions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_suppliers`
 --
 
@@ -772,8 +802,9 @@ DROP TABLE IF EXISTS `tb_user_level`;
 CREATE TABLE `tb_user_level` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_9cjndmbhgt9twgnhljqibcjsn` (`description`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -782,7 +813,7 @@ CREATE TABLE `tb_user_level` (
 
 LOCK TABLES `tb_user_level` WRITE;
 /*!40000 ALTER TABLE `tb_user_level` DISABLE KEYS */;
-INSERT INTO `tb_user_level` VALUES (3,'SUPER ADMIN'), (2,'ADMIN'),(1,'USER');
+INSERT INTO `tb_user_level` VALUES (2,'ADMIN'),(3,'SUPER ADMIN'),(1,'USER');
 /*!40000 ALTER TABLE `tb_user_level` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -816,33 +847,6 @@ LOCK TABLES `tb_user_permission` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tb_subscriptions`
---
-
-DROP TABLE IF EXISTS `tb_subscriptions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tb_subscriptions` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_users` int(10) unsigned NOT NULL,
-  `subscription_id` varchar(255) DEFAULT NULL,
-  `customer_id` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `subscriptions_FKIndex1` (`id_users`),
-  CONSTRAINT `tb_subscriptions_ibfk_1` FOREIGN KEY (`id_users`) REFERENCES `tb_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tb_subscriptions`
---
-
-LOCK TABLES `tb_subscriptions` WRITE;
-/*!40000 ALTER TABLE `tb_subscriptions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tb_subscriptions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `tb_users`
 --
 
@@ -862,8 +866,13 @@ CREATE TABLE `tb_users` (
   `phone` varchar(255) DEFAULT NULL,
   `zipcode` decimal(10,0) DEFAULT NULL,
   `created_by` int(10) unsigned DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `UK8n82lwp7lflhwda2v2v3wckc9` (`username`),
+  UNIQUE KEY `UKgrd22228p1miaivbn9yg178pm` (`email`),
   KEY `users_FKIndex1` (`id`),
+  KEY `tb_users_ibfk_1` (`id_user_level`),
   CONSTRAINT `tb_users_ibfk_1` FOREIGN KEY (`id_user_level`) REFERENCES `tb_user_level` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -890,4 +899,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-13 23:01:26
+-- Dump completed on 2023-12-15 12:40:45
