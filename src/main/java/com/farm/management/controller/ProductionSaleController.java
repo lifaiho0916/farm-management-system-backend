@@ -82,6 +82,7 @@ public class ProductionSaleController {
 		ProductCrop setProductCrop = productCropService.getProductCropById(saleReq.getProductCropId());
 		selectedProductSale.setSupplier(setSupplier);
 		selectedProductSale.setProductCrop(setProductCrop);
+		selectedProductSale.setSale_date(saleReq.getSale_date());
 		selectedProductSale.setAmount_money(saleReq.getAmount_money());
 		selectedProductSale.setQuantity(saleReq.getQuantity());
 		selectedProductSale.setQuotes(saleReq.getQuotes());
