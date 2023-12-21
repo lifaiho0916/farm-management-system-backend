@@ -10,7 +10,7 @@ import com.farm.management.model.Purchase;
 
 public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 	
-	@Query(value = "select * from tb_purchase where id_farm = :farmId", nativeQuery = true)
+	@Query(value = "SELECT * FROM tb_purchase WHERE id_farm = :farmId", nativeQuery = true)
     List<Purchase> getPurchaseByFarmId(@Param("farmId") Long farmId);
 
 }
