@@ -33,10 +33,11 @@ public class ProductionSaleServiceImpl implements ProductionSaleService {
     	ProductionSale existingProductionSale = productionSaleRepository.findById(productionSale.getId()).get();
     	existingProductionSale.setSupplier(productionSale.getSupplier());
     	existingProductionSale.setProductCrop(productionSale.getProductCrop());
-    	existingProductionSale.setSaleDate(productionSale.getSaleDate());
+    	existingProductionSale.setSale_date(productionSale.getSale_date());
     	existingProductionSale.setQuotes(productionSale.getQuotes());
-    	existingProductionSale.setAmountMoney(productionSale.getAmountMoney());
-    	existingProductionSale.setPaymentDate(productionSale.getPaymentDate());
+    	existingProductionSale.setAmount_money(productionSale.getAmount_money());
+    	existingProductionSale.setQuantity(productionSale.getQuantity());
+    	existingProductionSale.setTotal_installment(productionSale.getTotal_installment());
         return productionSaleRepository.save(existingProductionSale);
     }
 

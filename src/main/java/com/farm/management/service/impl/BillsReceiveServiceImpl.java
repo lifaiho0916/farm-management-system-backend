@@ -30,9 +30,7 @@ public class BillsReceiveServiceImpl implements BillsReceiveService {
 
     @Override
     public BillsReceive updateBillsReceive(BillsReceive billsReceive) {
-    	BillsReceive existingBillsReceive = billsReceiveRepository.findById(billsReceive.getId()).get();
-    	existingBillsReceive.setAmount(billsReceive.getAmount());
-        return billsReceiveRepository.save(existingBillsReceive);
+        return billsReceiveRepository.save(billsReceive);
     }
 
     @Override

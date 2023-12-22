@@ -16,9 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.farm.management.model.BillsReceive;
+import com.farm.management.model.PaymentMethod;
+import com.farm.management.model.ProductionSale;
+import com.farm.management.payload.BillsReceiveRequest;
 import com.farm.management.security.CurrentUser;
 import com.farm.management.security.UserPrincipal;
 import com.farm.management.service.BillsReceiveService;
+import com.farm.management.service.PaymentMethodService;
+import com.farm.management.service.ProductionSaleService;
 
 import lombok.AllArgsConstructor;
 
@@ -30,11 +35,27 @@ public class BillsToReceiveController {
 	@Autowired
     private BillsReceiveService billsReceiveService;
 	
+	@Autowired
+    private PaymentMethodService paymentMethodService;
+	
+	@Autowired
+    private ProductionSaleService productSaleService;
+	
 	@PostMapping("toReceive")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<BillsReceive> createUnit(@RequestBody BillsReceive billsReceive, @CurrentUser UserPrincipal currentUser) {
-		billsReceive.setAmount(billsReceive.getAmount());
-		BillsReceive result = billsReceiveService.createBillsReceive(billsReceive);
+	public ResponseEntity<BillsReceive> createBillsRecevie(@RequestBody BillsReceiveRequest billsReceiveReq, @CurrentUser UserPrincipal currentUser) {
+		BillsReceive newBills = new BillsReceive();
+		PaymentMethod setPayMethod = paymentMethodService.getPaymentMethodById(billsReceiveReq.getPaymentMethodId());
+		ProductionSale setProductionSale = productSaleService.getProductionSaleById(billsReceiveReq.getProductSaleId());
+		newBills.setPaymentMethod(setPayMethod);
+		newBills.setProductionSale(setProductionSale);
+		newBills.setAmount(billsReceiveReq.getAmount());
+		newBills.setInstallment(billsReceiveReq.getInstallment());
+		newBills.setAmount_received(billsReceiveReq.getAmount_received());
+		newBills.setExpected_receive_date(billsReceiveReq.getExpected_receive_date());
+		newBills.setReceive_date_made(billsReceiveReq.getReceive_date_made());
+		newBills.setQuantity(billsReceiveReq.getQuantity());
+		BillsReceive result = billsReceiveService.createBillsReceive(newBills);
 	    return new ResponseEntity<>(result, HttpStatus.CREATED);
 	}
 	
@@ -56,9 +77,19 @@ public class BillsToReceiveController {
 	@PutMapping("toReceive/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<BillsReceive> updateUser(@PathVariable("id") Long id,
-	                                       @RequestBody BillsReceive billsReceive){
-		billsReceive.setId(id);
-	    BillsReceive updatedBillsReceive = billsReceiveService.updateBillsReceive(billsReceive);
+	                                       @RequestBody BillsReceiveRequest billsReceiveReq){
+		BillsReceive setBill = billsReceiveService.getBillsReceiveById(id);
+		PaymentMethod setPaymentMethod = paymentMethodService.getPaymentMethodById(billsReceiveReq.getPaymentMethodId());
+		ProductionSale setProductSale = productSaleService.getProductionSaleById(billsReceiveReq.getProductSaleId());
+		setBill.setPaymentMethod(setPaymentMethod);
+		setBill.setProductionSale(setProductSale);
+		setBill.setAmount(billsReceiveReq.getAmount());
+//		setBill.setInstallment(billsReceiveReq.getInstallment());
+		setBill.setAmount_received(billsReceiveReq.getAmount_received());
+		setBill.setQuantity(billsReceiveReq.getQuantity());
+//		setBill.setExpected_receive_date(billsReceiveReq.getExpected_receive_date());
+//		setBill.setReceive_date_made(billsReceiveReq.getReceive_date_made());
+	    BillsReceive updatedBillsReceive = billsReceiveService.updateBillsReceive(setBill);
 	    return new ResponseEntity<>(updatedBillsReceive, HttpStatus.OK);
 	}
 	

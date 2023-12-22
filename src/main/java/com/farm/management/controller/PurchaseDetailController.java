@@ -21,7 +21,7 @@ import com.farm.management.model.Purchase;
 import com.farm.management.model.PurchaseDetail;
 import com.farm.management.model.Supplier;
 import com.farm.management.model.Unit;
-import com.farm.management.payload.PurchaseRequest;
+import com.farm.management.payload.PurchaseDetailRequest;
 import com.farm.management.repository.PurchaseDetailRepository;
 import com.farm.management.security.CurrentUser;
 import com.farm.management.security.UserPrincipal;
@@ -60,9 +60,9 @@ public class PurchaseDetailController {
 	@Autowired
 	private PurchaseDetailRepository purchaseDetailRepository;
 	
-	@PostMapping("purchase")
+	@PostMapping("purchaseDetail")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<PurchaseDetail> createPurchaseDetail(@RequestBody PurchaseRequest purchaseRequest, @CurrentUser UserPrincipal currentUser) {
+	public ResponseEntity<PurchaseDetail> createPurchaseDetail(@RequestBody PurchaseDetailRequest purchaseRequest, @CurrentUser UserPrincipal currentUser) {
 		System.out.println(purchaseRequest);
 		PurchaseDetail purchaseDetail = new PurchaseDetail();
 		
@@ -88,24 +88,24 @@ public class PurchaseDetailController {
 	}
 	
 	
-	@GetMapping("purchase/{id}")
+	@GetMapping("purchaseDetail/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<PurchaseDetail> getPurchaseDetailById(@PathVariable("id") Long id){
 		PurchaseDetail result = purchaseDetailService.getPurchaseDetailById(id);
 	    return new ResponseEntity<>(result, HttpStatus.OK);
 	}
     
-    @GetMapping("purchases/{id}")
+    @GetMapping("purchasesDetail/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<PurchaseDetail>> findByFarmId(@PathVariable("id") Long id){
         List<PurchaseDetail> result = purchaseDetailService.getPurchaseDetailByFarmId(id);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 	
-	@PutMapping("purchase/{id}")
+	@PutMapping("purchaseDetail/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<PurchaseDetail> updatePurchaseDetail(@PathVariable("id") Long id,
-	                                       @RequestBody PurchaseRequest purchaseRequest){
+	                                       @RequestBody PurchaseDetailRequest purchaseRequest){
 		System.out.println(purchaseRequest);
 		PurchaseDetail setPurchaseDetail = purchaseDetailService.getPurchaseDetailById(id);
 		Purchase setPurchase = purchaseService.getPurchaseById(purchaseRequest.getPurchaseId());
@@ -125,16 +125,11 @@ public class PurchaseDetailController {
 	    return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("purchase/{id}")
+	@DeleteMapping("purchaseDetail/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<String> deletePurchaseDetail(@PathVariable("id") Long id){
 		purchaseDetailService.deletePurchaseDetail(id);
 	    return new ResponseEntity<>("PurchaseDetail successfully deleted!", HttpStatus.OK);
 	}
-
-    public List<PurchaseDetail> getPurchaseDetailByFarmId(Long farmId){
-        return purchaseDetailRepository.getPurchaseDetailByFarmId(farmId);
-    }
-
 
 }

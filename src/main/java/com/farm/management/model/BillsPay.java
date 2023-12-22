@@ -35,8 +35,8 @@ public class BillsPay {
     private PaymentMethod paymentMethod;
     
     private Double amount;
-    private Double payment_date_made;
+    private Instant payment_date_made;
     private Double amount_paid;
-    private Double insallment;
+    private Double installment;
     private Instant expected_payment_date;
 }
