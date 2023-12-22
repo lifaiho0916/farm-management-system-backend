@@ -22,7 +22,6 @@ import com.farm.management.model.PurchaseDetail;
 import com.farm.management.model.Supplier;
 import com.farm.management.model.Unit;
 import com.farm.management.payload.PurchaseDetailRequest;
-import com.farm.management.repository.PurchaseDetailRepository;
 import com.farm.management.security.CurrentUser;
 import com.farm.management.security.UserPrincipal;
 import com.farm.management.service.FarmService;
@@ -56,9 +55,6 @@ public class PurchaseDetailController {
 	
 	@Autowired
 	private SupplierService supplierService;
-	
-	@Autowired
-	private PurchaseDetailRepository purchaseDetailRepository;
 	
 	@PostMapping("purchaseDetail")
 	@PreAuthorize("isAuthenticated()")

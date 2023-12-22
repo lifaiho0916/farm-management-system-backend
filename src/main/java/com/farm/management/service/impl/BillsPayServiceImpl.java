@@ -31,7 +31,6 @@ public class BillsPayServiceImpl implements BillsPayService {
     @Override
     public BillsPay updateBillsPay(BillsPay billsPay) {
     	BillsPay existingBillsPay = billsPayRepository.findById(billsPay.getId()).get();
-    	existingBillsPay.setAmount(billsPay.getAmount());
         return billsPayRepository.save(existingBillsPay);
     }
 

@@ -51,6 +51,7 @@ public class BillsToPayController {
 		newBills.setPurchase(setPurchase);
 		newBills.setAmount(BillsPayReq.getAmount());
 		newBills.setExpected_payment_date(BillsPayReq.getExpected_payment_date());
+		newBills.setPayment_date_made(BillsPayReq.getPayment_date_made());
 		newBills.setAmount_paid(BillsPayReq.getAmount_paid());
 		newBills.setInstallment(BillsPayReq.getInstallment());
 		BillsPay result = BillsPayService.createBillsPay(newBills);
@@ -85,7 +86,7 @@ public class BillsToPayController {
 		setBill.setAmount_paid(BillsPayReq.getAmount_paid());
 		setBill.setInstallment(BillsPayReq.getInstallment());
 //		setBill.setExpected_payment_date(BillsPayReq.getExpected_payment_date());
-		setBill.setPayment_date_made(BillsPayReq.getPayment_date_made());
+//		setBill.setPayment_date_made(BillsPayReq.getPayment_date_made());
 	    BillsPay updatedBillsPay = BillsPayService.updateBillsPay(setBill);
 	    return new ResponseEntity<>(updatedBillsPay, HttpStatus.OK);
 	}
@@ -94,7 +95,7 @@ public class BillsToPayController {
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<String> deleteBillsPay(@PathVariable("id") Long id){
 		BillsPayService.deleteBillsPay(id);
-	    return new ResponseEntity<>("Bill to receive is successfully deleted!", HttpStatus.OK);
+	    return new ResponseEntity<>("Bill to pay is successfully deleted!", HttpStatus.OK);
 	}
 
 }
