@@ -14,6 +14,6 @@ public interface PurchaseDetailService {
 
     void deletePurchaseDetail(Long id);
     
-    List<PurchaseDetail> getPurchaseDetailByFarmId(Long farmId);
+    List<PurchaseDetail> getPurchaseDetailByPurchaseId(Long id);
 
 }

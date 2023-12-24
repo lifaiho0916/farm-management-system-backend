@@ -15,20 +15,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.farm.management.model.Farm;
 import com.farm.management.model.Product;
 import com.farm.management.model.Purchase;
 import com.farm.management.model.PurchaseDetail;
-import com.farm.management.model.Supplier;
 import com.farm.management.model.Unit;
 import com.farm.management.payload.PurchaseDetailRequest;
 import com.farm.management.security.CurrentUser;
 import com.farm.management.security.UserPrincipal;
-import com.farm.management.service.FarmService;
 import com.farm.management.service.ProductService;
 import com.farm.management.service.PurchaseDetailService;
 import com.farm.management.service.PurchaseService;
-import com.farm.management.service.SupplierService;
 import com.farm.management.service.UnitService;
 
 import lombok.AllArgsConstructor;
@@ -46,36 +42,21 @@ public class PurchaseDetailController {
 
 	@Autowired
 	private ProductService productService;
-	
-	@Autowired
-	private UnitService unitService;
 
 	@Autowired
-	private FarmService farmService;
-	
-	@Autowired
-	private SupplierService supplierService;
+	private UnitService unitService;
 	
 	@PostMapping("purchaseDetail")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<PurchaseDetail> createPurchaseDetail(@RequestBody PurchaseDetailRequest purchaseRequest, @CurrentUser UserPrincipal currentUser) {
 		System.out.println(purchaseRequest);
 		PurchaseDetail purchaseDetail = new PurchaseDetail();
-		
-		Purchase purchase = new Purchase();
-		Farm selectedFarm = farmService.getFarmById(purchaseRequest.getFarmId());
-		Supplier selectedSupplier = supplierService.getSupplierById(purchaseRequest.getSupplierId());
-		purchase.setFarm(selectedFarm);
-		purchase.setSupplier(selectedSupplier);
-		purchase.setDate(purchaseRequest.getDate());
-		purchase.setTotalPrice(purchaseRequest.getTotalPrice());
-		purchase.setTotalInstallment(purchaseRequest.getTotalInstallment());
-		Purchase savedPurchase = purchaseService.createPurchase(purchase);
+		Purchase savedPurchase = purchaseService.getPurchaseById(purchaseRequest.getPurchaseId());
 		purchaseDetail.setPurchase(savedPurchase);
-		Unit selectedUnit = unitService.getUnitById(purchaseRequest.getUnitId());
-		purchaseDetail.setUnit(selectedUnit);
 		Product selectedProduct = productService.getProductById(purchaseRequest.getProductId());
 		purchaseDetail.setProduct(selectedProduct);
+		Unit selectedUnit = unitService.getUnitById(purchaseRequest.getUnitId());
+		purchaseDetail.setUnit(selectedUnit);
 		purchaseDetail.setQuantity(purchaseRequest.getQuantity());
 		purchaseDetail.setPrice(purchaseRequest.getPrice());
 		purchaseDetail.setLote(purchaseRequest.getLote());
@@ -91,10 +72,10 @@ public class PurchaseDetailController {
 	    return new ResponseEntity<>(result, HttpStatus.OK);
 	}
     
-    @GetMapping("purchasesDetail/{id}")
+    @GetMapping("purchaseDetails/{id}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<PurchaseDetail>> findByFarmId(@PathVariable("id") Long id){
-        List<PurchaseDetail> result = purchaseDetailService.getPurchaseDetailByFarmId(id);
+    public ResponseEntity<List<PurchaseDetail>> findByPurchaseId(@PathVariable("id") Long id){
+        List<PurchaseDetail> result = purchaseDetailService.getPurchaseDetailByPurchaseId(id);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 	
@@ -105,14 +86,10 @@ public class PurchaseDetailController {
 		System.out.println(purchaseRequest);
 		PurchaseDetail setPurchaseDetail = purchaseDetailService.getPurchaseDetailById(id);
 		Purchase setPurchase = purchaseService.getPurchaseById(purchaseRequest.getPurchaseId());
-		Supplier setSupplier = supplierService.getSupplierById(purchaseRequest.getSupplierId());
-		setPurchase.setSupplier(setSupplier);
-		setPurchase.setDate(purchaseRequest.getDate());
-		setPurchase.setTotalInstallment(purchaseRequest.getTotalInstallment());
-		setPurchase.setTotalPrice(purchaseRequest.getTotalPrice());
-		Purchase updatedPurchase = purchaseService.updatePurchase(setPurchase);
 		Product setProduct = productService.getProductById(purchaseRequest.getProductId());
-		setPurchaseDetail.setPurchase(updatedPurchase);
+		Unit setUnit = unitService.getUnitById(purchaseRequest.getUnitId());
+		setPurchaseDetail.setUnit(setUnit);
+		setPurchaseDetail.setPurchase(setPurchase);
 		setPurchaseDetail.setProduct(setProduct);
 		setPurchaseDetail.setPrice(purchaseRequest.getPrice());
 		setPurchaseDetail.setQuantity(purchaseRequest.getQuantity());

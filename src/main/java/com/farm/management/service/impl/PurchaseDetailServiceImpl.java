@@ -31,12 +31,6 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
     @Override
     public PurchaseDetail updatePurchaseDetail(PurchaseDetail purchaseDetail) {
     	PurchaseDetail existingPurchase = purchaseDetailRepository.findById(purchaseDetail.getId()).get();
-    	existingPurchase.setProduct(purchaseDetail.getProduct());
-    	existingPurchase.setUnit(purchaseDetail.getUnit());
-    	existingPurchase.setPurchase(purchaseDetail.getPurchase());
-    	existingPurchase.setQuantity(purchaseDetail.getQuantity());
-    	existingPurchase.setPrice(purchaseDetail.getPrice());
-    	existingPurchase.setLote(purchaseDetail.getLote());
         return purchaseDetailRepository.save(existingPurchase);
     }
 
@@ -45,8 +39,8 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
     	purchaseDetailRepository.deleteById(id);
     }
 
-    public List<PurchaseDetail> getPurchaseDetailByFarmId(Long farmId){
-        return purchaseDetailRepository.getPurchaseDetailByFarmId(farmId);
+    public List<PurchaseDetail> getPurchaseDetailByPurchaseId(Long id){
+        return purchaseDetailRepository.getPurchaseDetailByPurchaseId(id);
     }
 
 }
