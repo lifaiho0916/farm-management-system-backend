@@ -11,6 +11,8 @@ public interface PurchaseService {
 	Purchase getPurchaseById(Long id);
 	
 	List<Purchase> getPurchaseByFarmId(Long farmId);
+	
+	List<Purchase> getPurchasesByAdminId(Long adminId);
 
 	Purchase updatePurchase(Purchase purchase);
 

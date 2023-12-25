@@ -71,6 +71,13 @@ public class PurchaseController {
         List<Purchase> result = purchaseService.getPurchaseByFarmId(id);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+    
+    @GetMapping("purchasesAdmin/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<List<Purchase>> findByAdminId(@PathVariable("id") Long id){
+        List<Purchase> result = purchaseService.getPurchasesByAdminId(id);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 	
 	@PutMapping("purchase/{id}")
 	@PreAuthorize("isAuthenticated()")

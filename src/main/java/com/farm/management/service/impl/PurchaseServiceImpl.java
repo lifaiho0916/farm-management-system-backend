@@ -31,11 +31,6 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public Purchase updatePurchase(Purchase purchase) {
     	Purchase existingPurchase = purchaseRepository.findById(purchase.getId()).get();
-    	existingPurchase.setFarm(purchase.getFarm());
-    	existingPurchase.setSupplier(purchase.getSupplier());
-    	existingPurchase.setDate(purchase.getDate());
-    	existingPurchase.setTotalPrice(purchase.getTotalPrice());
-    	existingPurchase.setTotalInstallment(purchase.getTotalInstallment());
         return purchaseRepository.save(existingPurchase);
     }
 
@@ -46,6 +41,10 @@ public class PurchaseServiceImpl implements PurchaseService {
     
     public List<Purchase> getPurchaseByFarmId(Long farmId){
         return purchaseRepository.getPurchaseByFarmId(farmId);
+    }
+    
+    public List<Purchase> getPurchasesByAdminId(Long adminId){
+        return purchaseRepository.getPurchasesByAdminId(adminId);
     }
 
 }
