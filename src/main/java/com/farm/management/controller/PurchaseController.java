@@ -51,8 +51,8 @@ public class PurchaseController {
 		purchase.setFarm(selectedFarm);
 		purchase.setSupplier(selectedSupplier);
 		purchase.setDate(purchaseRequest.getDate());
-		purchase.setTotalPrice(purchaseRequest.getTotalPrice());
-		purchase.setTotalInstallment(purchaseRequest.getTotalInstallment());
+		purchase.setTotalPrice(0.0);
+		purchase.setTotalInstallment(0.0);
 		Purchase savedPurchase = purchaseService.createPurchase(purchase);
 	    return new ResponseEntity<Purchase>(savedPurchase, HttpStatus.CREATED);
 	}
@@ -90,8 +90,8 @@ public class PurchaseController {
 		setPurchase.setFarm(setFarm);
 		setPurchase.setSupplier(setSupplier);
 //		setPurchase.setDate(purchaseRequest.getDate());
-		setPurchase.setTotalInstallment(purchaseRequest.getTotalInstallment());
-		setPurchase.setTotalPrice(purchaseRequest.getTotalPrice());
+//		setPurchase.setTotalInstallment(purchaseRequest.getTotalInstallment());
+//		setPurchase.setTotalPrice(purchaseRequest.getTotalPrice());
 		Purchase result = purchaseService.updatePurchase(setPurchase);
 	    return new ResponseEntity<>(result, HttpStatus.OK);
 	}

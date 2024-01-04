@@ -49,10 +49,11 @@ public class PurchaseDetailController {
 	@PostMapping("purchaseDetail")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<PurchaseDetail> createPurchaseDetail(@RequestBody PurchaseDetailRequest purchaseRequest, @CurrentUser UserPrincipal currentUser) {
-		System.out.println(purchaseRequest);
+		System.out.println("previous purchase is yes");
+		Purchase selectedPurchase = purchaseService.getPurchaseById(purchaseRequest.getPurchaseId());
+		selectedPurchase.setTotalPrice(selectedPurchase.getTotalPrice() + purchaseRequest.getPrice()*purchaseRequest.getQuantity());
 		PurchaseDetail purchaseDetail = new PurchaseDetail();
-		Purchase savedPurchase = purchaseService.getPurchaseById(purchaseRequest.getPurchaseId());
-		purchaseDetail.setPurchase(savedPurchase);
+		purchaseDetail.setPurchase(selectedPurchase);
 		Product selectedProduct = productService.getProductById(purchaseRequest.getProductId());
 		purchaseDetail.setProduct(selectedProduct);
 		Unit selectedUnit = unitService.getUnitById(purchaseRequest.getUnitId());
@@ -86,6 +87,7 @@ public class PurchaseDetailController {
 		System.out.println(purchaseRequest);
 		PurchaseDetail setPurchaseDetail = purchaseDetailService.getPurchaseDetailById(id);
 		Purchase setPurchase = purchaseService.getPurchaseById(purchaseRequest.getPurchaseId());
+		setPurchase.setTotalPrice(setPurchase.getTotalPrice() + purchaseRequest.getPrice()*purchaseRequest.getQuantity() - setPurchaseDetail.getPrice()*setPurchaseDetail.getQuantity());
 		Product setProduct = productService.getProductById(purchaseRequest.getProductId());
 		Unit setUnit = unitService.getUnitById(purchaseRequest.getUnitId());
 		setPurchaseDetail.setUnit(setUnit);

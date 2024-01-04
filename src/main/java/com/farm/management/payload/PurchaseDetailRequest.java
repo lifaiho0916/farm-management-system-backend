@@ -1,5 +1,7 @@
 package com.farm.management.payload;
 
+import java.time.Instant;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,6 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PurchaseDetailRequest {
 	
+	private Long farmId;
+	private Long supplierId;
+	private Instant date;
 	private Long productId;
 	private Long purchaseId;
 	private Long unitId;

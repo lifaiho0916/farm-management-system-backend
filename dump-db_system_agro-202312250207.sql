@@ -36,7 +36,7 @@ CREATE TABLE `tb_bills_to_pay` (
   KEY `bills_to_pay_FKIndex2` (`id_payment_method`),
   CONSTRAINT `tb_bills_to_pay_ibfk_1` FOREIGN KEY (`id_purchase`) REFERENCES `tb_purchase` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tb_bills_to_pay_ibfk_2` FOREIGN KEY (`id_payment_method`) REFERENCES `tb_payment_method` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,6 @@ CREATE TABLE `tb_bills_to_pay` (
 
 LOCK TABLES `tb_bills_to_pay` WRITE;
 /*!40000 ALTER TABLE `tb_bills_to_pay` DISABLE KEYS */;
-INSERT INTO `tb_bills_to_pay` VALUES (1,1,1,'2023-12-29',200,'2023-12-29',100,3);
 /*!40000 ALTER TABLE `tb_bills_to_pay` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,7 +70,7 @@ CREATE TABLE `tb_bills_to_receive` (
   KEY `bills_to_receive_FKIndex2` (`id_payment_method`),
   CONSTRAINT `tb_bills_to_receive_ibfk_1` FOREIGN KEY (`id_production_sales`) REFERENCES `tb_production_sales` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tb_bills_to_receive_ibfk_2` FOREIGN KEY (`id_payment_method`) REFERENCES `tb_payment_method` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,7 +79,6 @@ CREATE TABLE `tb_bills_to_receive` (
 
 LOCK TABLES `tb_bills_to_receive` WRITE;
 /*!40000 ALTER TABLE `tb_bills_to_receive` DISABLE KEYS */;
-INSERT INTO `tb_bills_to_receive` VALUES (1,1,1,'2023-12-27',120,1,95,'2023-12-21',NULL),(2,1,1,'2023-12-27',100,2,95,'2023-12-21',NULL),(3,1,1,'2023-12-27',105,3,100,'2023-12-21',NULL);
 /*!40000 ALTER TABLE `tb_bills_to_receive` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +157,7 @@ CREATE TABLE `tb_crop` (
 
 LOCK TABLES `tb_crop` WRITE;
 /*!40000 ALTER TABLE `tb_crop` DISABLE KEYS */;
-INSERT INTO `tb_crop` VALUES (1,1,'Coffe','2023','03','11'),(2,1,'Coffe','2023',NULL,NULL);
+INSERT INTO `tb_crop` VALUES (1,1,'Coffe','2023','03','11'),(2,1,'Corn','2023',NULL,NULL);
 /*!40000 ALTER TABLE `tb_crop` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -572,7 +570,7 @@ CREATE TABLE `tb_purchase` (
   KEY `purchase_FKIndex2` (`id_suppliers`),
   CONSTRAINT `tb_purchase_ibfk_1` FOREIGN KEY (`id_farm`) REFERENCES `tb_farm` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tb_purchase_ibfk_2` FOREIGN KEY (`id_suppliers`) REFERENCES `tb_suppliers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -581,7 +579,6 @@ CREATE TABLE `tb_purchase` (
 
 LOCK TABLES `tb_purchase` WRITE;
 /*!40000 ALTER TABLE `tb_purchase` DISABLE KEYS */;
-INSERT INTO `tb_purchase` VALUES (1,1,1,NULL,100,2),(2,1,1,NULL,120,2),(3,1,1,NULL,120,2),(4,2,1,NULL,150,2),(5,1,1,NULL,550,3);
 /*!40000 ALTER TABLE `tb_purchase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -607,7 +604,7 @@ CREATE TABLE `tb_purchase_detail` (
   CONSTRAINT `tb_purchase_detail_ibfk_1` FOREIGN KEY (`id_purchase`) REFERENCES `tb_purchase` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tb_purchase_detail_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tb_purchase_detail_ibfk_3` FOREIGN KEY (`id_products`) REFERENCES `tb_products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -616,7 +613,6 @@ CREATE TABLE `tb_purchase_detail` (
 
 LOCK TABLES `tb_purchase_detail` WRITE;
 /*!40000 ALTER TABLE `tb_purchase_detail` DISABLE KEYS */;
-INSERT INTO `tb_purchase_detail` VALUES (1,1,2,1,6,215,'Test1 Lote'),(2,1,1,3,12,1200,'good'),(3,1,2,4,9,310,'good'),(4,1,2,1,9,200,'Test2 Lote');
 /*!40000 ALTER TABLE `tb_purchase_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -706,7 +702,7 @@ CREATE TABLE `tb_stock_movement` (
   CONSTRAINT `tb_stock_movement_ibfk_2` FOREIGN KEY (`id_products`) REFERENCES `tb_products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tb_stock_movement_ibfk_3` FOREIGN KEY (`id_users`) REFERENCES `tb_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tb_stock_movement_ibfk_4` FOREIGN KEY (`id_purchase`) REFERENCES `tb_purchase` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -715,7 +711,6 @@ CREATE TABLE `tb_stock_movement` (
 
 LOCK TABLES `tb_stock_movement` WRITE;
 /*!40000 ALTER TABLE `tb_stock_movement` DISABLE KEYS */;
-INSERT INTO `tb_stock_movement` VALUES (1,1,1,1,1,'input value','2023-12-24 23:00:07',25.00);
 /*!40000 ALTER TABLE `tb_stock_movement` ENABLE KEYS */;
 UNLOCK TABLES;
 

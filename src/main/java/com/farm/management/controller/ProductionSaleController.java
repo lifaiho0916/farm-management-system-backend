@@ -98,5 +98,4 @@ public class ProductionSaleController {
 	    return new ResponseEntity<>("Production Sale method successfully deleted!", HttpStatus.OK);
 	}
 
-
 }
