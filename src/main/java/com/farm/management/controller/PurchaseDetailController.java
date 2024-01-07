@@ -102,9 +102,12 @@ public class PurchaseDetailController {
 	
 	@DeleteMapping("purchaseDetail/{id}")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<String> deletePurchaseDetail(@PathVariable("id") Long id){
+	public ResponseEntity<Purchase> deletePurchaseDetail(@PathVariable("id") Long id){
+		PurchaseDetail setPurchaseDetail = purchaseDetailService.getPurchaseDetailById(id);
+		Purchase setPurchase = setPurchaseDetail.getPurchase();
+		setPurchase.setTotalPrice(setPurchase.getTotalPrice() - setPurchaseDetail.getPrice()*setPurchaseDetail.getQuantity());
 		purchaseDetailService.deletePurchaseDetail(id);
-	    return new ResponseEntity<>("PurchaseDetail successfully deleted!", HttpStatus.OK);
+	    return new ResponseEntity<>(setPurchase, HttpStatus.OK);
 	}
 
 }

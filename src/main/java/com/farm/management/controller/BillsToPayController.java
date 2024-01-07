@@ -47,6 +47,7 @@ public class BillsToPayController {
 		BillsPay newBills = new BillsPay();
 		PaymentMethod setPayMethod = paymentMethodService.getPaymentMethodById(BillsPayReq.getPaymentMethodId());
 		Purchase setPurchase = purchaseService.getPurchaseById(BillsPayReq.getPurchaseId());
+		setPurchase.setTotalInstallment(setPurchase.getTotalInstallment() + 1);
 		newBills.setPaymentMethod(setPayMethod);
 		newBills.setPurchase(setPurchase);
 		newBills.setAmount(BillsPayReq.getAmount());
@@ -84,7 +85,7 @@ public class BillsToPayController {
 		setBill.setPurchase(setpurchase);
 		setBill.setAmount(BillsPayReq.getAmount());
 		setBill.setAmount_paid(BillsPayReq.getAmount_paid());
-		setBill.setInstallment(BillsPayReq.getInstallment());
+//		setBill.setInstallment(BillsPayReq.getInstallment());
 //		setBill.setExpected_payment_date(BillsPayReq.getExpected_payment_date());
 //		setBill.setPayment_date_made(BillsPayReq.getPayment_date_made());
 	    BillsPay updatedBillsPay = BillsPayService.updateBillsPay(setBill);
@@ -93,9 +94,12 @@ public class BillsToPayController {
 	
 	@DeleteMapping("toPay/{id}")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<String> deleteBillsPay(@PathVariable("id") Long id){
+	public ResponseEntity<Purchase> deleteBillsPay(@PathVariable("id") Long id){
+		BillsPay setBill = BillsPayService.getBillsPayById(id);
+		Purchase setPurchase = setBill.getPurchase();
+		setPurchase.setTotalInstallment(setPurchase.getTotalInstallment() - 1);
 		BillsPayService.deleteBillsPay(id);
-	    return new ResponseEntity<>("Bill to pay is successfully deleted!", HttpStatus.OK);
+	    return new ResponseEntity<>(setPurchase, HttpStatus.OK);
 	}
 
 }
